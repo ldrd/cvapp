@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -58,6 +60,10 @@ public class Activity implements Serializable {
 	 */
 	@Basic
 	private String websiteUrl;
+	
+	@ManyToOne
+	@JoinColumn(name = "person", nullable = false)
+	private Person person;
 
 	public long getId() {
 		return id;
@@ -105,5 +111,13 @@ public class Activity implements Serializable {
 
 	public void setWebsiteUrl(String websiteUrl) {
 		this.websiteUrl = websiteUrl;
+	}
+	
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 }
