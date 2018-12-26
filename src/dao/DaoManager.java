@@ -1,8 +1,6 @@
 package dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -50,6 +48,19 @@ public class DaoManager {
 	}
 	
 	public List<Person> findByName(String name) {
-		return null;
+		String[] strs = name.split(" ");
+		StringBuilder str = new StringBuilder();
+		String q = "Select * from Person where firstname like %:str% or lastname like %:str%";
+		
+		if (strs.length > 0)
+			str.append(q);
+		for (int i = 1; i < strs.length; i++) {
+			str.append(" intersect ");
+			str.append(q);
+		}
+		
+		TypedQuery<Person> query = em.createQuery(str.toString(), Person.class);
+		query.setParameter("str", str);
+		return query.getResultList();
 	}
 }
