@@ -1,32 +1,33 @@
-package beans;
+package cvapp;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="Activity")
 public class Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id()
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue
+	private Long id;
 	
 	/*
 	 * Validation : birthday < year < now
 	 * UI : Primefaces.InputNumber
 	 * Mandatory : Yes
 	 */
-	@Basic(optional = false)
+	@Column(length = 4)
+	@NotNull
 	private int year;
 	
 	/*
@@ -34,7 +35,8 @@ public class Activity implements Serializable {
 	 * UI : Primefaces.SelectOneMenu
 	 * Mandatory : Yes
 	 */
-	@Basic(optional = false)
+	@Column
+	@NotNull
 	private String type;
 	
 	/*
@@ -42,7 +44,8 @@ public class Activity implements Serializable {
 	 * UI : p:inputText
 	 * Mandatory : Yes
 	 */
-	@Basic(optional = false)
+	@Column
+	@NotNull @Size(min = 3, max = 100)
 	private String title;
 	
 	/*
@@ -50,7 +53,8 @@ public class Activity implements Serializable {
 	 * UI : Primefaces.InputTextarea (Autoresize)
 	 * Mandatory : No
 	 */
-	@Basic
+	@Lob
+	@Size(min = 5, max = 4000)
 	private String description;
 	
 	/*
@@ -58,18 +62,18 @@ public class Activity implements Serializable {
 	 * UI : p:inputText
 	 * Mandatory : No
 	 */
-	@Basic
+	@Column
 	private String websiteUrl;
 	
 	@ManyToOne
 	@JoinColumn(name = "person", nullable = false)
 	private Person person;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

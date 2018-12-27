@@ -4,6 +4,15 @@
   <artifactId>cvapp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  
+  <dependencies>
+  	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-entitymanager</artifactId>
+	    <version>4.3.11.Final</version>
+	</dependency>
+  </dependencies>
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
