@@ -12,14 +12,14 @@
 	<h:outputScript library="js" name="menu.js" />
 	<div id="menu-content">
 		<h:form class="search-form">
-		    <p:inputText id="text" class="search-bar" onclick="switchSearchResultVisibility()"
+		    <p:inputText id="text" class="search-bar" onfocus="showSearchResult()" onblur="hideSearchResult()"
 		    	value="#{person.searchQuery}" placeholder="Search">
 		        <p:ajax event="keyup" update="affichage"
    					listener="#{person.findByName}" />
 		    </p:inputText>
-		    <h:dataTable id="affichage" class="menu-search hidden" value="#{person.queryResult}" var="p">
+		    <h:dataTable id="affichage" class="menu-search" value="#{person.queryResult}" var="p">
 	    		<h:column>
-			        #{p.firstname}
+			        #{p.firstname} #{p.lastname}
 			    </h:column>
 		    </h:dataTable>
 		    
