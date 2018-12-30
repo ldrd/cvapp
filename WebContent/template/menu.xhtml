@@ -4,16 +4,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition>
-    <div>Menu :</div>
-    <h:form>
-	    <ul>
-		    <li>Hello</li>
-		    <li>Bye</li>
-	    </ul>
-    </h:form>
+	<h:outputScript library="js" name="menu.js" />
+	<div id="menu-content">
+		<h:form class="search-form">
+		    <p:inputText id="text" class="search-bar" onclick="switchSearchResultVisibility()"
+		    	value="#{person.searchQuery}" placeholder="Search">
+		        <p:ajax event="keyup" update="affichage"
+   					listener="#{person.findByName}" />
+		    </p:inputText>
+		    <h:dataTable id="affichage" class="menu-search hidden" value="#{person.queryResult}" var="p">
+	    		<h:column>
+			        #{p.firstname}
+			    </h:column>
+		    </h:dataTable>
+		    
+		</h:form>
+	    <h:form class="login-form right">
+		    <p:inputText placeholder="Email"/>
+		    <p:inputText placeholder="Password"/>
+		    <p:commandButton id="sign-up" value="Log In"/>
+	    </h:form>
+    </div>
 </ui:composition>
 
 </html>

@@ -1,6 +1,8 @@
 package cvapp;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -36,24 +38,37 @@ public class PersonManager {
 		em.remove(person);
 	}
 	
+	
+	//We could use intersect but hql doesn't allow it
 	public List<Person> findPersonsByName(String name) {
-		String[] strs = name.split(" ");
-		StringBuilder str = new StringBuilder();
-		String q = "Select p from Person p where firstname like %:str% or lastname like %:str%";
-		
-		if (strs.length > 0)
-			str.append(q);
-		for (int i = 1; i < strs.length; i++) {
-			str.append(" intersect ");
-			str.append(q);
-		}
-		
-		TypedQuery<Person> query = em.createQuery(str.toString(), Person.class);
-		query.setParameter("str", str);
-		return query.getResultList();
+		return findPersonsByName(name, 0);
 	}
 
 	public List<Person> findAll() {
 		return em.createQuery("Select p From Person p", Person.class).getResultList();
+	}
+
+	public List<Person> findPersonsByName(String name, int limit) {
+		List<Person> result = new ArrayList<Person>();
+		String[] strs = name.split(" ");
+		String q = "Select p from Person p where firstname like :str or lastname like :str";
+		
+		if (strs.length > 0) {
+			TypedQuery<Person> query = em.createQuery(q, Person.class);
+			query.setParameter("str", "%" + strs[0] + "%");
+			result.addAll(query.getResultList());
+		}
+		
+		for (int i = 1; i < strs.length; i++) {
+			TypedQuery<Person> query = em.createQuery(q, Person.class);
+			query.setParameter("str", "%" + strs[i] + "%");
+			List<Person> tmp = query.getResultList();
+			//intersect between result and tmp
+			result = result.stream().filter(tmp::contains).collect(Collectors.toList());
+		}
+		if (limit > 0)
+			result = result.subList(0, Math.min(8, result.size()));
+		
+		return result;
 	}
 }
