@@ -17,8 +17,9 @@ public class PersonController {
 	PersonManager mgr;
 	
 	private String searchQuery;
-	
 	private List<Person> queryResult = new ArrayList<Person>();
+	
+	private Person thePerson = new Person();
 	
 	@PostConstruct
     public void init() {
@@ -40,6 +41,8 @@ public class PersonController {
             mgr.save(p2);
         }
         
+        //A enlever, juste pour tester la page searchresult
+        queryResult = mgr.findPersonsByName("L");
     }
 	
 	public Person savePerson(Person person) {
@@ -52,7 +55,6 @@ public class PersonController {
 	
 	public void findByName(AjaxBehaviorEvent event){
 		queryResult = mgr.findPersonsByName(searchQuery, 8);
-		System.out.println(queryResult.size());
     }
 	
 	public List<Person> getPersons() {
@@ -73,6 +75,20 @@ public class PersonController {
 
 	public void setQueryResult(List<Person> queryResult) {
 		this.queryResult = queryResult;
+	}
+	
+	public String cv(Long id) {
+		setThePerson(mgr.find(id));
+		System.out.println("call showCV");
+		return "cv?faces-redirect=true";
+	}
+
+	public Person getThePerson() {
+		return thePerson;
+	}
+
+	public void setThePerson(Person thePerson) {
+		this.thePerson = thePerson;
 	}
 	
 }

@@ -9,6 +9,7 @@
     xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition>
+	<h:outputStylesheet library="css" name="menu.css" />
 	<h:outputScript library="js" name="menu.js" />
 	<div id="menu-content">
 		<h:form class="search-form">
@@ -19,10 +20,10 @@
 		    </p:inputText>
 		    <h:dataTable id="affichage" class="menu-search" value="#{person.queryResult}" var="p">
 	    		<h:column>
-			        #{p.firstname} #{p.lastname}
+	    			<h:commandLink action="#{person.cv(p.id)}"
+	    				value="#{p.firstname} #{p.lastname} #{p.id}"/>
 			    </h:column>
 		    </h:dataTable>
-		    
 		</h:form>
 	    <h:form class="login-form right">
 		    <p:inputText placeholder="Email"/>

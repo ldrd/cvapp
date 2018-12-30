@@ -10,22 +10,16 @@
     <ui:define name="content">
         <!-- Header -->
         <div class="search-result col2 row2">
-        	<div class="result">
-        		<div>
-        			<h1><a href="">Loïc Drouard</a></h1>
-        			<h2>Étudiant en M2 informatique Ingénierie du logiciel et des données</h2>
-        			<p>Région de Marseille, France</p>
-        		</div>
-        	</div>
-        	<div class="result">
-        		<div>
-        			<h1><a href="">Loïc Drouard</a></h1>
-        			<h2>Étudiant en M2 informatique Ingénierie du logiciel et des données</h2>
-        			<p>Région de Marseille, France</p>
-        		</div>
-        	</div>
+        	<ui:repeat var="p" value="#{person.queryResult}">
+	        	<div class="result">
+	        		<div>
+	        			<h1><a href="">#{p.lastname}</a></h1>
+	        			<h2>#{p.firstname}</h2>
+	        			<p>#{p.email}</p>
+	        		</div>
+	        	</div>
+        	</ui:repeat>
         </div>
-        
     </ui:define>
 </ui:composition>
 </html>

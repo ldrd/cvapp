@@ -10,14 +10,14 @@
     <ui:define name="content">
     	<div id="personal-infos" class="block">
     		<div>
-    			<h1>Loïc Drouard</h1>
+    			<h1>#{person.thePerson.firstname} #{person.thePerson.lastname}</h1>
     			<h2>Étudiant en M2 informatique Ingénierie du logiciel et des données</h2>
     			<h3>Marseille 09, Provence-Alpes-Côte d’Azur, France</h3>
     		</div>
     		<div id="sub-infos">
     			<span class="position">Aix-Marseille Université</span><br/>
     			Email :
-    			<span class="email">loic.drouard@free.fr</span><br/>
+    			<span class="email">#{person.thePerson.email}</span><br/>
     			Birthday : 
     			<span class="birthday">29 march 1995</span>
     		</div>
