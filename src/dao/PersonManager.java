@@ -1,4 +1,4 @@
-package cvapp;
+package dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+import beans.Person;
 
 @Stateless
 public class PersonManager {
@@ -42,6 +44,13 @@ public class PersonManager {
 	//We could use intersect but hql doesn't allow it
 	public List<Person> findPersonsByName(String name) {
 		return findPersonsByName(name, 0);
+	}
+	
+	public List<Person> findPersonsByEmail(String email) {
+		String q = "Select p From Person p where email = :email";
+		TypedQuery<Person> query = em.createQuery(q, Person.class);
+		query.setParameter("email", email);
+		return query.getResultList();
 	}
 
 	public List<Person> findAll() {

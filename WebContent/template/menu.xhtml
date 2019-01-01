@@ -26,9 +26,9 @@
 		    </h:dataTable>
 		</h:form>
 	    <h:form class="login-form right">
-		    <p:inputText placeholder="Email"/>
-		    <p:inputText placeholder="Password"/>
-		    <p:commandButton id="sign-up" value="Log In"/>
+		    <p:inputText placeholder="Email" value="#{user.user.login}"/>
+		    <p:password placeholder="Password" value="#{user.user.password}"/>
+		    <p:commandButton id="sign-up" value="Log In" action="#{user.login}"/>
 	    </h:form>
     </div>
 </ui:composition>

@@ -11,7 +11,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function showSearchResult() {
 	document.getElementsByClassName("menu-search")[0].style.visibility = "visible";
 }
-/*
-function hideSearchResult() {
-	document.getElementsByClassName("menu-search")[0].style.visibility = "hidden";
-}*/

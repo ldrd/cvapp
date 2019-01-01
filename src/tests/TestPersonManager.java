@@ -14,8 +14,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import cvapp.Person;
-import cvapp.PersonManager;
+import beans.Person;
+import dao.PersonManager;
 
 public class TestPersonManager {
 	

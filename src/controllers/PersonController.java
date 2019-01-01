@@ -1,4 +1,4 @@
-package cvapp;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
+
+import beans.Person;
+import dao.PersonManager;
 
 @ManagedBean(name = "person")
 @SessionScoped
@@ -88,6 +91,7 @@ public class PersonController {
 	}
 
 	public void setThePerson(Person thePerson) {
+		System.out.println("Set the person");
 		this.thePerson = thePerson;
 	}
 	
