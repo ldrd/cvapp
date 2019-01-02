@@ -29,18 +29,25 @@ public class PersonController {
         System.out.println("Create " + this);
         if (mgr.findAll().size() == 0) {
         	System.out.println("Je fais ça");
+        	Person p = new Person();
+            p.setFirstname("test");
+            p.setLastname("test");
+            p.setEmail("test@free.fr");
+            p.setPassword("1");
+            mgr.save(p);
+        	
             Person p1 = new Person();
             p1.setFirstname("Loic");
             p1.setLastname("Drouard");
             p1.setEmail("loic.drouard@free.fr");
-            p1.setPassword("llllllllllllll");
+            p1.setPassword("12");
             mgr.save(p1);
             
             Person p2 = new Person();
             p2.setFirstname("Lina");
             p2.setLastname("Benhamza");
             p2.setEmail("lina.benhamza@free.fr");
-            p2.setPassword("llllllllllllll");
+            p2.setPassword("123");
             mgr.save(p2);
         }
         

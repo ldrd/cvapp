@@ -24,9 +24,16 @@
     		
     	</div>
     	<div class="block">
-    		<h2>Experiences</h2>
+    		<h2>
+    			Experiences
+    			<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
+    				library="images" name="plus.svg" alt=""/>
+    		</h2>
+    		
     		<div class="result">
     			<div>
+    				<h:graphicImage class="icon-profile" rendered="#{user.user.loggedIn}"
+    					library="images" name="edit.svg" alt=""/>
 	    			<h1>Trainee</h1>
 	    			<h2>STMicroelectronics</h2>
 	    			<h3>2015-2015</h3>
@@ -39,14 +46,22 @@
     		
     	</div>
     	<div class="block">
-    		<h2>Education</h2>
+    		<h2>
+    			Education
+    			<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
+    				library="images" name="plus.svg" alt=""/>
+    		</h2>
     		<div class="result">
     			<div>
+    				<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
+    					library="images" name="edit.svg" alt=""/>
 	    			<h1>Aix-Marseille University</h1>
 	    			<h2>Master's degree, Informatique</h2>
 	    			<h3>2017-2019</h3>
 	    		</div>
 	    		<div>
+	    			<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
+	    				library="images" name="edit.svg" alt=""/>
 	    			<h1>Aix-Marseille University</h1>
 	    			<h2>Master's degree, Informatique</h2>
 	    		</div>
@@ -54,9 +69,35 @@
     		</div>
     	</div>
     	<div class="block">
-    		<h2>Projects</h2>
+    		<h2>
+    			Projects
+    			<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
+    				library="images" name="plus.svg" alt=""/>
+    		</h2>
     	</div>
         
+        
+        <div class="modal modal-activity">
+        	<div class="modal-content">
+	        	<h3>Title</h3>
+	        	<p:inputText value="Old value"/>
+	        	<h3>Year</h3>
+	        	<p:inputNumber/>
+	        	<h3>Description</h3>
+	        	<p:inputTextarea rows="3" cols="40" />
+        	</div>
+        </div>
+        
+        <div class="modal modal-profile">
+        	<div class="modal-content">
+	        	<h3>Title</h3>
+	        	<p:inputText value="Old value"/>
+	        	<h3>Year</h3>
+	        	<p:inputNumber/>
+	        	<h3>Description</h3>
+	        	<p:inputTextarea rows="3" cols="40" />
+        	</div>
+        </div>
     </ui:define>
 </ui:composition>
 </html>

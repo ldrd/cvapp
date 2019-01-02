@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,6 +24,9 @@ public class Person implements Serializable {
 	@GeneratedValue
 	private Long id;
 	
+	@Column(name = "picture")
+	private String picture;
+	
 	@Column(name = "lastname")
 	@NotNull @Size(min = 2, max = 50)
 	private String lastname;
@@ -29,14 +35,25 @@ public class Person implements Serializable {
 	@NotNull @Size(min = 2, max = 50)
 	private String firstname;
 	
+	@Column(name = "headline")
+	@Size(max = 123)
+	private String headline;
 	/*
 	 * Validation : regex ? ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$
 	 * UI : p:inputText
 	 * Mandatory : Yes
 	 */
+	
+	@Column(name = "position")
+	@Size(max = 100)
+	private String position;
+	
 	@Column(name = "email", unique = true)
 	@NotNull @Size(min = 5) //5 : _@_._
 	private String email;
+	
+	@Column(name= "adress")
+	private String adress;
 	
 	/*
 	 * Validation : Yes but don't know what to use, regex ?
@@ -46,14 +63,18 @@ public class Person implements Serializable {
 	@Column(name = "websiteUrl")
 	private String websiteUrl;
 	
+	@Column(name = "summary")
+	@Size(max = 700) 
+	private String summary;
+	
 	/*
 	 * Validation : None
 	 * UI : Primefaces.Calendar
 	 * Mandatory : Yes
 	 */
-	//@Column(name = "birthday")
-	//@Temporal(TemporalType.DATE)
-	//private Date birthday;
+	@Column(name = "birthday")
+	@Temporal(TemporalType.DATE)
+	private Date birthday;
 	
 	/*
 	 * Validation : None ? or maybe add min chars
@@ -132,12 +153,59 @@ public class Person implements Serializable {
 		this.activities = activities;
 	}
 
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getHeadline() {
+		return headline;
+	}
+
+	public void setHeadline(String headline) {
+		this.headline = headline;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + ", email=" + email
-				+ ", websiteUrl=" + websiteUrl + ", password=" + password + ", activities="
-				+ activities + "]";
+		return "Person [id=" + id + ", picture=" + picture + ", lastname=" + lastname + ", firstname=" + firstname
+				+ ", headline=" + headline + ", position=" + position + ", email=" + email + ", adress=" + adress
+				+ ", websiteUrl=" + websiteUrl + ", summary=" + summary + ", birthday=" + birthday + ", password="
+				+ password + ", activities=" + activities + "]";
 	}
-	
-	
 }
