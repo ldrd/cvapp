@@ -30,7 +30,7 @@ public class UserController {
 
 	public String logout() {
 		user.logout();
-		return FacesContext.getCurrentInstance().getViewRoot().getViewId();
+		return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
 		
 	}
 	

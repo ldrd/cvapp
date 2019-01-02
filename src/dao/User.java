@@ -3,7 +3,6 @@ package dao;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
 import beans.Person;
@@ -35,7 +34,6 @@ public class User {
         return true;
     }
 
-    @Remove
     public void logout() {
         id = null;
         email = password = "";
