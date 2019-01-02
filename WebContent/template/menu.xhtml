@@ -13,7 +13,7 @@
 	<h:outputScript library="js" name="menu.js" />
 	<div id="menu-content">
 		<h:form class="search-form">
-		    <p:inputText id="text" class="search-bar" onfocus="showSearchResult()" onblur="hideSearchResult()"
+		    <p:inputText id="text" class="search-bar" onfocus="showSearchResult()"
 		    	value="#{person.searchQuery}" placeholder="Search">
 		        <p:ajax event="keyup" update="affichage"
    					listener="#{person.findByName}" />

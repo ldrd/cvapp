@@ -21,22 +21,12 @@ public class Person implements Serializable {
 	@GeneratedValue
 	private Long id;
 	
-	/*
-	 * Validation : Only characters, at least 2 chars, start with a capital letter. Regex ? (A-Z){1}[a-z]+
-	 * UI : p:inputText
-	 * Mandatory : Yes
-	 */
 	@Column(name = "lastname")
-	@NotNull @Size(min = 2)
+	@NotNull @Size(min = 2, max = 50)
 	private String lastname;
 	
-	/*
-	 * Validation : Only characters, at least 2 chars, start with a capital letter. Regex ? [A-Z][a-z]+
-	 * UI : p:inputText
-	 * Mandatory : Yes
-	 */
 	@Column(name = "firstname")
-	@NotNull @Size(min = 2)
+	@NotNull @Size(min = 2, max = 50)
 	private String firstname;
 	
 	/*

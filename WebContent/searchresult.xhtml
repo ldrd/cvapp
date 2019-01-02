@@ -8,18 +8,16 @@
 
 <ui:composition template="/template/mylayout.xhtml">
     <ui:define name="content">
-        <!-- Header -->
-        <div class="search-result col2 row2">
-        	<ui:repeat var="p" value="#{person.queryResult}">
-	        	<div class="result">
-	        		<div>
-	        			<h1><a href="">#{p.lastname}</a></h1>
-	        			<h2>#{p.firstname}</h2>
-	        			<p>#{p.email}</p>
-	        		</div>
-	        	</div>
-        	</ui:repeat>
-        </div>
+        <p:dataScroller value="#{person.queryResult}" var="p" chunkSize="2"
+	      		class="search-result col2 row2">
+	        <div class="result">
+	       		<div>
+	       			<h1><a href="">#{p.lastname}</a></h1>
+	       			<h2>#{p.firstname}</h2>
+	       			<p>#{p.email}</p>
+	       		</div>
+	       	</div>
+	    </p:dataScroller>
     </ui:define>
 </ui:composition>
 </html>
