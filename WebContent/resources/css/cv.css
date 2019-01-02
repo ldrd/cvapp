@@ -1,0 +1,67 @@
+.icon-profile {
+	width: 20px;
+	float: right;
+	cursor: pointer;
+}
+
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+  
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	border: 1px solid #888;
+	width: 700px;
+	
+}
+
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	padding: 10px;
+	padding-right: 16px;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.scrollable-content {
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-gap: 5px;
+	padding: 16px;
+	height: 80vh;
+}
+
+.scrollable-content .label {
+	margin-top: 15px;
+}
+
+.modal-content header {
+	font-size: 24px;
+	padding: 16px;
+	border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+.modal-content footer {
+	padding: 16px;
+	border-top: 1px solid rgba(0,0,0,.15);
+}

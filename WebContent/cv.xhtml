@@ -8,7 +8,13 @@
 
 <ui:composition template="/template/mylayout.xhtml">
     <ui:define name="content">
+    	<h:outputScript library="js" name="cv.js" />
+    	<h:outputStylesheet library="css" name="cv.css" />
     	<div id="personal-infos" class="block">
+    		<div class="col2">
+    			<h:graphicImage class="icon-profile" onclick="showEditProfile()"
+    					library="images" name="edit.svg" alt=""/>
+    		</div>
     		<div>
     			<h1>#{person.thePerson.firstname} #{person.thePerson.lastname}</h1>
     			<h2>Étudiant en M2 informatique Ingénierie du logiciel et des données</h2>
@@ -75,29 +81,48 @@
     				library="images" name="plus.svg" alt=""/>
     		</h2>
     	</div>
-        
-        
-        <div class="modal modal-activity">
-        	<div class="modal-content">
-	        	<h3>Title</h3>
-	        	<p:inputText value="Old value"/>
-	        	<h3>Year</h3>
-	        	<p:inputNumber/>
-	        	<h3>Description</h3>
-	        	<p:inputTextarea rows="3" cols="40" />
-        	</div>
-        </div>
-        
-        <div class="modal modal-profile">
-        	<div class="modal-content">
-	        	<h3>Title</h3>
-	        	<p:inputText value="Old value"/>
-	        	<h3>Year</h3>
-	        	<p:inputNumber/>
-	        	<h3>Description</h3>
-	        	<p:inputTextarea rows="3" cols="40" />
-        	</div>
-        </div>
+    	
+    	<div id="modal-profile" class="modal">
+		  <div class="modal-content">
+		  <span class="close" onclick="hideProfileModal()">&#215;</span>
+		    <header>
+		    	Edit
+		    	
+		    </header>
+		    <div class="scrollable-content">
+				<span class="col1 row2 label">First Name</span><br/>
+				<p:inputText class="col1 row3"/>
+				
+				<span class="col2 row2 label">Last Name</span><br/>
+				<p:inputText  class="col2 row3"/>
+				
+				<span class="label col1">Headline</span><br/>
+				<p:inputTextarea class="cols13" maxlength="123" autoResize="false" />
+				
+				<span class="label">Current position</span><br/>
+				<p:inputText class="cols13"/>
+	
+				<span class="label">Adress</span><br/>
+				<p:inputText class="cols13"/>
+				
+				<span class="label">Email</span><br/>
+				<p:inputText class="cols13"/>
+	
+				<span class="label">Website</span><br/>
+				<p:inputText class="cols13"/>
+	
+				<span class="label">Birthday</span><br/>
+				<p:calendar class="cols13"/>
+	
+				<span class="label">Summary</span><br/>
+				<p:inputTextarea class="cols13" maxlength="500" autoResize="false" />
+			</div>
+			<footer>
+				<p:commandButton value="Save"/>
+			</footer>
+		  </div>
+		</div>
+
     </ui:define>
 </ui:composition>
 </html>
