@@ -50,4 +50,12 @@ public class UserController {
 	public void setPersonController(PersonController pc) {
 		this.personController = pc;
 	}
+	
+	public String home() {
+		if (user.isLoggedIn()) {
+			personController.setThePerson(personController.getPerson(user.getId()));
+			return "cv?faces-redirect=true";
+		}
+		return "inscription?faces-redirect=true";	
+	}
 }

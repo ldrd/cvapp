@@ -11,7 +11,13 @@
 <ui:composition>
 	<h:outputStylesheet library="css" name="menu.css" />
 	<h:outputScript library="js" name="menu.js" />
+	
 	<div id="menu-content">
+		<h:form>
+			<p:commandLink action="#{user.home}" style="float:left;margin-right:20px">
+				<h:graphicImage style="width:30px;" library="images" name="home.svg" alt=""/>
+			</p:commandLink>
+		</h:form>
 		<h:form class="search-form">
 		    <p:inputText id="text" class="search-bar" onfocus="showSearchResult()"
 		    	value="#{person.searchQuery}" placeholder="Search">
