@@ -178,3 +178,12 @@ form h3 {
 	font-size: 0.8em;
 	color: rgba(0,0,0,.6);
 }
+
+.test {
+	padding: 10px;
+	margin: 0px;
+	padding-bottom: 0;
+	background-color: white;
+	color: rgb(66,103,178);
+	display: inline;
+}

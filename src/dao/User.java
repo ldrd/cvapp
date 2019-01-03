@@ -11,26 +11,25 @@ import beans.Person;
 public class User {
         
 	private Long id;
+	private String firstname;
+	private String lastname;
     private String email;
-    private String password;
+	private String password;
     private boolean loggedIn;
-    
-    @EJB
+
+	@EJB
 	PersonManager mgr;
 
     public boolean login() {
         List<Person> persons = mgr.findPersonsByEmail(email);
         //Should be = 1
-        System.out.println("firstStep");
         if (persons.size() != 1) return false;
         
         Person potentialUser = persons.get(0);
-        System.out.println("secondStep");
         if (!potentialUser.getPassword().equals(password)) return false;
         
         id = potentialUser.getId();
         loggedIn = true;
-        System.out.println("thirdStep");
         return true;
     }
 
@@ -72,4 +71,19 @@ public class User {
 		this.password = password;
 	}
 
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
 }

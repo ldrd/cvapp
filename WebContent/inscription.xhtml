@@ -12,12 +12,17 @@
         	<h1>Create a New Account</h1> <!-- Inscription -->
         	<h2>It’s free and always will be.</h2> <!-- C'est gratuit (et ça le restera toujours) -->
             <div id="sign-up-grid">
-	            <p:inputText class="col1 row1" placeholder="First name" required="true"/>
-	            <p:inputText class="col2 row1" placeholder="Last name" required="true"/>
-	            <p:inputText class="cols13 row2" placeholder="Email" required="true"/>
-	            <p:inputText class="cols13 row3" placeholder="New password" required="true"/>
+	            <p:inputText class="col1 row1" placeholder="First name"
+	            	value="#{user.user.firstname}" required="true"/>
+	            <p:inputText class="col2 row1" placeholder="Last name"
+	            	value="#{user.user.lastname}" required="true"/>
+	            <p:inputText class="cols13" placeholder="Email"
+	            	value="#{user.user.login}" required="true"/>
+	            <p:inputText class="cols13" placeholder="New password"
+	            	value="#{user.user.password}" required="true"/>
             </div>
-            <p:commandButton class="sign-up" value="Sign Up" style="margin-top=20px"/>
+            <p:commandButton class="sign-up" value="Sign Up" style="margin-top=20px"
+            	action="#{user.signup()}"/>
         </h:form>
         
     </ui:define>

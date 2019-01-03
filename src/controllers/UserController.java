@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import beans.Person;
 import dao.User;
 
 @ManagedBean(name = "user")
@@ -26,6 +27,16 @@ public class UserController {
 			return "cv?faces-redirect=true";
 		}
 		return null;
+	}
+	
+	public String signup() {
+		Person p = new Person();
+		p.setFirstname(user.getFirstname());
+		p.setLastname(user.getLastname());
+		p.setEmail(user.getLogin());
+		p.setPassword(user.getPassword());
+		personController.savePerson(p);
+		return login();
 	}
 
 	public String logout() {
