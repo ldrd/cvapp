@@ -27,11 +27,17 @@ public class PersonManager {
 	}
 	
 	public Person save(Person person) {
-		System.out.println(person.toString());
-		if (person.getId() == null)
+		System.out.println("hello2.5");
+		if (person.getId() == null) {
+			System.out.println("hello2.75");
 			em.persist(person);
-		else
+		}
+		else {
+			System.out.println("hello2.65");
+			System.out.println(person.getFirstname());
 			person = em.merge(person);
+		}
+			
 		return person;
 	}
 	

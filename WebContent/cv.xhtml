@@ -83,44 +83,46 @@
     	</div>
     	
     	<div id="modal-profile" class="modal">
-		  <div class="modal-content">
-		  <span class="close" onclick="hideProfileModal()">&#215;</span>
-		    <header>
-		    	Edit
-		    </header>
-		    <div class="scrollable-content">
-				<span class="col1 row2 label">First Name</span><br/>
-				<p:inputText class="col1 row3"/>
-				
-				<span class="col2 row2 label">Last Name</span><br/>
-				<p:inputText  class="col2 row3"/>
-				
-				<span class="label col1">Headline</span><br/>
-				<p:inputTextarea class="cols13" maxlength="123" autoResize="false" />
-				
-				<span class="label">Current position</span><br/>
-				<p:inputText class="cols13"/>
-	
-				<span class="label">Adress</span><br/>
-				<p:inputText class="cols13"/>
-				
-				<span class="label">Email</span><br/>
-				<p:inputText class="cols13"/>
-	
-				<span class="label">Website</span><br/>
-				<p:inputText class="cols13"/>
-	
-				<span class="label">Birthday</span><br/>
-				<p:calendar class="cols13"/>
-	
-				<span class="label">Summary</span><br/>
-				<p:inputTextarea class="cols13" maxlength="500" autoResize="false" />
-			</div>
-			<footer>
-				<p:commandButton value="Save"/>
-			</footer>
-		  </div>
+			<h:form class="modal-content">
+			  	<span class="close" onclick="hideProfileModal()">&#215;</span>
+			    <header>
+			    	Edit
+			    </header>
+			    <div class="scrollable-content">
+			    	<c:set var="p" value="#{person.thePerson}" />
+					<span class="col1 row2 label">First Name *</span><br/>
+					<p:inputText class="col1 row3"  value="#{p.firstname}"/>
+					
+					<span class="col2 row2 label">Last Name *</span><br/>
+					<p:inputText  class="col2 row3"  value="#{p.lastname}"/>
+					
+					<span class="label col1">Headline</span><br/>
+					<p:inputTextarea class="cols13" maxlength="123" autoResize="false"  value="#{p.headline}"/>
+					
+					<span class="label">Current position</span><br/>
+					<p:inputText class="cols13"  value="#{p.position}"/>
+		
+					<span class="label">Address</span><br/>
+					<p:inputText class="cols13" value="#{p.address}"/>
+					
+					<span class="label">Email *</span><br/>
+					<p:inputText class="cols13" value="#{p.email}"/>
+		
+					<span class="label">Website</span><br/>
+					<p:inputText class="cols13"  value="#{p.websiteUrl}"/>
+		
+					<span class="label">Birthday</span><br/>
+					<p:calendar class="cols13"  value="#{p.birthday}"/>
+		
+					<span class="label">Summary</span><br/>
+					<p:inputTextarea class="cols13" maxlength="500" autoResize="false"  value="#{p.summary}"/>
+				</div>
+				<footer>
+					<p:commandButton id="save-profile" value="Save" action="#{person.saveThePerson}"/>
+				</footer>
+			</h:form>
 		</div>
+		
 		
 		<div id="modal-activity" class="modal">
 		  <div class="modal-content">

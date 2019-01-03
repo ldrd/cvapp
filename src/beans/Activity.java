@@ -17,7 +17,7 @@ public class Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id()
+	@Id
 	@GeneratedValue
 	private Long id;
 	

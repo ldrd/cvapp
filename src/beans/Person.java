@@ -52,8 +52,8 @@ public class Person implements Serializable {
 	@NotNull @Size(min = 5) //5 : _@_._
 	private String email;
 	
-	@Column(name= "adress")
-	private String adress;
+	@Column(name= "address")
+	private String address;
 	
 	/*
 	 * Validation : Yes but don't know what to use, regex ?
@@ -177,12 +177,12 @@ public class Person implements Serializable {
 		this.position = position;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getSummary() {
@@ -199,13 +199,5 @@ public class Person implements Serializable {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-
-	@Override
-	public String toString() {
-		return "Person [id=" + id + ", picture=" + picture + ", lastname=" + lastname + ", firstname=" + firstname
-				+ ", headline=" + headline + ", position=" + position + ", email=" + email + ", adress=" + adress
-				+ ", websiteUrl=" + websiteUrl + ", summary=" + summary + ", birthday=" + birthday + ", password="
-				+ password + ", activities=" + activities + "]";
 	}
 }

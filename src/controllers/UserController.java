@@ -21,9 +21,7 @@ public class UserController {
 	
 	public String login() {
 		if (user.login()) {
-			System.out.println("4 step");
 			personController.setThePerson(personController.getPerson(user.getId()));
-			System.out.println("5 step");
 			return "cv?faces-redirect=true";
 		}
 		return null;

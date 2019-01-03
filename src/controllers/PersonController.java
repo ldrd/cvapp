@@ -56,6 +56,7 @@ public class PersonController {
     }
 	
 	public Person savePerson(Person person) {
+		System.out.println("hello2");
 		return mgr.save(person);
 	}
 	
@@ -89,7 +90,6 @@ public class PersonController {
 	
 	public String cv(Long id) {
 		setThePerson(mgr.find(id));
-		System.out.println("call showCV");
 		return "cv?faces-redirect=true";
 	}
 
@@ -98,8 +98,13 @@ public class PersonController {
 	}
 
 	public void setThePerson(Person thePerson) {
-		System.out.println("Set the person");
 		this.thePerson = thePerson;
+	}
+	
+	public String saveThePerson() {
+		System.out.println("Hello");
+		savePerson(thePerson);
+		return "cv?faces-redirect=true";
 	}
 	
 }
