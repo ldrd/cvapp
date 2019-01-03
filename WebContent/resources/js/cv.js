@@ -4,16 +4,28 @@ function showEditProfile() {
 	document.getElementById('modal-profile').style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
+function showEditActivity() {
+	document.body.style.overflow = "hidden"
+	document.getElementById('modal-activity').style.display = "block";
+}
+
+function hideActivityModal() {
+	document.body.style.overflow = "auto"
+	document.getElementById('modal-activity').style.display = "none";
+}
+
 function hideProfileModal() {
 	document.body.style.overflow = "auto"
 	document.getElementById('modal-profile').style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == document.getElementById('modal-profile')) {
 	  document.body.style.overflow = "auto"
 	  document.getElementById('modal-profile').style.display = "none";
+  }
+  if (event.target == document.getElementById('modal-activity')) {
+	  document.body.style.overflow = "auto"
+	  document.getElementById('modal-activity').style.display = "none";
   }
 }

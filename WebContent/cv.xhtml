@@ -32,14 +32,14 @@
     	<div class="block">
     		<h2>
     			Experiences
-    			<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
+    			<h:graphicImage class="icon-profile" onclick="showEditActivity()"
     				library="images" name="plus.svg" alt=""/>
     		</h2>
     		
     		<div class="result">
     			<div>
-    				<h:graphicImage class="icon-profile" rendered="#{user.user.loggedIn}"
-    					library="images" name="edit.svg" alt=""/>
+    				<h:graphicImage class="icon-profile"  onclick="showEditActivity()"
+    					rendered="#{user.user.loggedIn}" library="images" name="edit.svg" alt=""/>
 	    			<h1>Trainee</h1>
 	    			<h2>STMicroelectronics</h2>
 	    			<h3>2015-2015</h3>
@@ -87,7 +87,6 @@
 		  <span class="close" onclick="hideProfileModal()">&#215;</span>
 		    <header>
 		    	Edit
-		    	
 		    </header>
 		    <div class="scrollable-content">
 				<span class="col1 row2 label">First Name</span><br/>
@@ -115,6 +114,36 @@
 				<p:calendar class="cols13"/>
 	
 				<span class="label">Summary</span><br/>
+				<p:inputTextarea class="cols13" maxlength="500" autoResize="false" />
+			</div>
+			<footer>
+				<p:commandButton value="Save"/>
+			</footer>
+		  </div>
+		</div>
+		
+		<div id="modal-activity" class="modal">
+		  <div class="modal-content">
+		  <span class="close" onclick="hideActivityModal()">&#215;</span>
+		    <header>
+		    	Add / Edit
+		    </header>
+		    <div class="scrollable-content">
+				<span class="label">Title</span><br/>
+				<p:inputText class="cols13"/>
+				
+				<span class="label">Company / School</span><br/>
+				<p:inputText  class="cols13"/>
+				
+				<span class="label col1 row5">From</span><br/>
+				<p:inputText class="col1 row6"/>
+				<p:inputText class="col1 row7"/>
+				
+				<span class="label col2 row5">To</span><br/>
+				<p:inputText class="col2 row6"/>
+				<p:inputText class="col2 row7"/>
+	
+				<span class="label">Description</span><br/>
 				<p:inputTextarea class="cols13" maxlength="500" autoResize="false" />
 			</div>
 			<footer>
