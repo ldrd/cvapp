@@ -22,8 +22,9 @@
 		    <p:inputText id="text" class="search-bar" onfocus="showSearchResult()"
 		    	value="#{person.searchQuery}" placeholder="Search">
 		        <p:ajax event="keyup" update="affichage"
-   					listener="#{person.findByName}" />
+   					listener="#{person.findByName}" /> 
 		    </p:inputText>
+		   <p:commandButton icon="ui-icon-search" action="#{user.searchPersons()}"/>
 		    <h:dataTable id="affichage" class="menu-search" value="#{person.queryResult}" var="p">
 	    		<h:column>
 	    			<h:commandLink action="#{person.cv(p.id)}"

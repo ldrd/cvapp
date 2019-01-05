@@ -58,4 +58,11 @@ public class UserController {
 		}
 		return "inscription?faces-redirect=true";	
 	}
+	
+	public String searchPersons() {
+		System.out.println("hello");
+		personController.findByName();
+		System.out.println("hello2");
+		return "searchresult?faces-redirect=true";
+	}
 }

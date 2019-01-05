@@ -50,18 +50,18 @@ public class PersonController {
             p2.setPassword("123");
             mgr.save(p2);
         }
-        
-        //A enlever, juste pour tester la page searchresult
-        queryResult = mgr.findPersonsByName("L");
     }
 	
 	public Person savePerson(Person person) {
-		System.out.println("hello2");
 		return mgr.save(person);
 	}
 	
 	public Person getPerson(Long id) {
 		return mgr.find(id);
+	}
+	
+	public void findByName() {
+		queryResult = mgr.findPersonsByName(searchQuery);
 	}
 	
 	public void findByName(AjaxBehaviorEvent event){
@@ -102,7 +102,6 @@ public class PersonController {
 	}
 	
 	public String saveThePerson() {
-		System.out.println("Hello");
 		savePerson(thePerson);
 		return "cv?faces-redirect=true";
 	}

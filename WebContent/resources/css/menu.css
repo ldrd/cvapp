@@ -30,7 +30,7 @@
 
 .menu-search {
 	margin: 0;
-	width: 100%;
+	width: 85%;
 	padding: 5px;
 	color: black;
 	background-color: white;
@@ -44,8 +44,12 @@
 }
 
 .search-form input {
-	width: 100%;
+	width: 85%;
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.search-button {
+	background-image: url(images/search.svg);
 }
