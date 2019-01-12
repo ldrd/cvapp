@@ -15,7 +15,7 @@ public class User {
 	private String lastname;
     private String email;
 	private String password;
-    private boolean loggedIn;
+    private boolean loggedIn = false;
 
 	@EJB
 	PersonManager mgr;
@@ -68,7 +68,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
 	}
 
 	public String getFirstname() {

@@ -1,5 +1,13 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -60,9 +68,21 @@ public class UserController {
 	}
 	
 	public String searchPersons() {
-		System.out.println("hello");
 		personController.findByName();
-		System.out.println("hello2");
 		return "searchresult?faces-redirect=true";
+	}
+	
+	public List<String> getMonths() {
+		Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+		Map<String, Integer> monthsMap = Calendar.getInstance().getDisplayNames(
+																Calendar.MONTH,
+																Calendar.LONG,
+																locale);
+		List<String> months = new ArrayList<>();
+		Map<Integer, String> invertedMap = monthsMap.entrySet().stream()
+	              								.collect(Collectors.toMap(Entry::getValue, Entry::getKey));
+		for (int i = 0; i < 12; i++)
+			months.add(invertedMap.get(i));
+		return months;
 	}
 }

@@ -8,23 +8,43 @@
 
 <ui:composition template="/template/mylayout.xhtml">
     <ui:define name="content">
-        <h:form class="right">
-        	<h1>Create a New Account</h1> <!-- Inscription -->
+    <ui:fragment rendered="#{!user.user.loggedIn}">
+        <h:form class="signup-form">
+        	<h1>Sign Up</h1> <!-- Inscription -->
         	<h2>It’s free and always will be.</h2> <!-- C'est gratuit (et ça le restera toujours) -->
             <div id="sign-up-grid">
-	            <p:inputText class="col1 row1" placeholder="First name"
-	            	value="#{user.user.firstname}" required="true"/>
-	            <p:inputText class="col2 row1" placeholder="Last name"
-	            	value="#{user.user.lastname}" required="true"/>
-	            <p:inputText class="cols13" placeholder="Email"
-	            	value="#{user.user.login}" required="true"/>
-	            <p:inputText class="cols13" placeholder="New password"
-	            	value="#{user.user.password}" required="true"/>
+	            <p:inputText id="firstname-insc" class="col1 row1" placeholder="First name" requiredMessage="Value required"
+	            	value="#{user.user.firstname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
+	            	<f:validateLength minimum="2" maximum="50" />
+	            	<f:validateRegex pattern="^[a-zA-Z]+$" />
+                	<p:clientValidator event="blur"/>
+	            </p:inputText>
+	           <p:message for="@previous"/>
+	            <p:inputText class="col2 row1" placeholder="Last name" requiredMessage="Value required"
+	            	value="#{user.user.lastname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
+	            	<f:validateLength minimum="2" maximum="50" />
+	            	<f:validateRegex pattern="^[a-zA-Z]+$" />
+                	<p:clientValidator event="blur"/>
+	            </p:inputText>
+	            <p:message for="@previous"/>
+	            <p:inputText class="cols13" placeholder="Email" requiredMessage="Value required"
+	            	value="#{user.user.login}" required="true" validatorMessage="This is not an email address">
+	            	<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+	            	<p:clientValidator event="blur"/>
+	            </p:inputText>
+	            <p:message for="@previous" class="cols13"/>
+	            <p:password class="cols13" placeholder="New password" requiredMessage="Value required"
+	            	value="#{user.user.password}" required="true" validatorMessage="Should be at least 6 characters">
+	            	<f:validateLength minimum="6"/>
+	            	<p:clientValidator event="blur"/>
+	            </p:password>
+	            <p:message for="@previous" class="cols13"/>
             </div>
+             
             <p:commandButton class="sign-up" value="Sign Up" style="margin-top=20px"
             	action="#{user.signup()}"/>
         </h:form>
-        
+    </ui:fragment>
     </ui:define>
 </ui:composition>
 </html>

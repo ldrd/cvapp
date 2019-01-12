@@ -6,10 +6,10 @@
 
 <ui:composition template="/template/mylayout.xhtml">
     <ui:define name="content">
-		<div class="test">
-			CV
-		</div>
-		
+		<p:commandButton value="test" actionListener="#{activity.initTheActivity}" update="xyz"/>
+		<h:panelGroup id="xyz">
+			Id  = #{activity.theActivity.id}
+		</h:panelGroup>
     </ui:define>
 </ui:composition>
 </html>

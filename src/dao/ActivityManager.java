@@ -1,18 +1,15 @@
 package dao;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 import beans.Activity;
 
 @Stateless
 public class ActivityManager {
 	
-	@PersistenceContext(unitName = "dataCV")
+	@PersistenceContext(unitName = "cvdata")
     EntityManager em;
 	
 	public Activity find(Long id) {
@@ -30,11 +27,5 @@ public class ActivityManager {
 	public void delete(Activity activity) {
 		activity = save(activity);
 		em.remove(activity);
-	}
-	
-	public List<Activity> findActivitiesByPerson(Long idPerson) {
-		TypedQuery<Activity> query = em.createQuery("Select * from Activity where person = :idPerson", Activity.class);
-		query.setParameter("idPerson", idPerson);
-		return query.getResultList();
 	}
 }

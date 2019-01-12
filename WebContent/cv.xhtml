@@ -8,78 +8,91 @@
 
 <ui:composition template="/template/mylayout.xhtml">
     <ui:define name="content">
+    <ui:fragment rendered="#{person.thePerson.id != null}">
     	<h:outputScript library="js" name="cv.js" />
     	<h:outputStylesheet library="css" name="cv.css" />
+    	
+    	<c:set var="p" value="#{person.thePerson}" />
     	<div id="personal-infos" class="block">
+    		<h:graphicImage style="width:160px"
+    					library="images" name="user.svg" alt=""/>
     		<div class="col2">
     			<h:graphicImage class="icon-profile" onclick="showEditProfile()"
-    					library="images" name="edit.svg" alt=""/>
+    				library="images" name="edit.svg" alt=""/>
     		</div>
-    		<div>
-    			<h1>#{person.thePerson.firstname} #{person.thePerson.lastname}</h1>
-    			<h2>Étudiant en M2 informatique Ingénierie du logiciel et des données</h2>
-    			<h3>Marseille 09, Provence-Alpes-Côte d’Azur, France</h3>
+    		<div class="col1">
+    			<h1>#{p.firstname} #{p.lastname}</h1>
+    			<h2>#{p.headline}</h2>
+    			<h3>#{p.address}</h3>
+    			<p>#{p.summary}</p>
     		</div>
     		<div id="sub-infos">
-    			<span class="position">Aix-Marseille Université</span><br/>
+    			<span class="position">#{p.position}</span><br/>
     			Email :
-    			<span class="email">#{person.thePerson.email}</span><br/>
+    			<span class="email">#{p.email}</span><br/>
     			Birthday : 
-    			<span class="birthday">29 march 1995</span>
+    			<span class="birthday">#{p.birthday.date} February #{p.birthday.year}</span>
     		</div>
     		
     	</div>
     	<div class="block">
     		<h2>
     			Experiences
-    			<h:graphicImage class="icon-profile" onclick="showEditActivity()"
-    				library="images" name="plus.svg" alt=""/>
+    			<p:commandButton class="icon-profile custom-button" icon="icon-add"
+    				action="#{activity.initTheActivity('experience')}" update="md-activity" onclick="showEditActivity()"/>
     		</h2>
     		
     		<div class="result">
-    			<div>
-    				<h:graphicImage class="icon-profile"  onclick="showEditActivity()"
-    					rendered="#{user.user.loggedIn}" library="images" name="edit.svg" alt=""/>
-	    			<h1>Trainee</h1>
-	    			<h2>STMicroelectronics</h2>
-	    			<h3>2015-2015</h3>
-	    			<p>
-	    				Développement d'une bibliothèque de pilotage d'une plateforme web. 
-	    				Bibliothèque développé avec le langage Python et avec la technologie REST.
-	    			</p>
-	    		</div>
+    			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
+	    			<h:panelGroup rendered="#{a.type == 'experience'}">
+	    				<p:commandButton class="icon-profile custom-button" icon="icon-edit"
+    						action="#{activity.editActivity(a.id)}" update="md-activity" onclick="showEditActivity()"/>
+		    			<h1>#{a.title}</h1>
+		    			<h2>#{a.place}</h2>
+		    			<h3>#{a.monthFrom} #{a.yearFrom} - #{a.monthTo} #{a.yearTo}</h3>
+		    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
+		    		</h:panelGroup>
+		    	</ui:repeat>
     		</div>
     		
     	</div>
     	<div class="block">
     		<h2>
     			Education
-    			<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
-    				library="images" name="plus.svg" alt=""/>
+    			<p:commandButton class="icon-profile custom-button" icon="icon-add"
+    				action="#{activity.initTheActivity('education')}" update="md-activity" onclick="showEditActivity()"/>
     		</h2>
     		<div class="result">
-    			<div>
-    				<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
-    					library="images" name="edit.svg" alt=""/>
-	    			<h1>Aix-Marseille University</h1>
-	    			<h2>Master's degree, Informatique</h2>
-	    			<h3>2017-2019</h3>
-	    		</div>
-	    		<div>
-	    			<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
-	    				library="images" name="edit.svg" alt=""/>
-	    			<h1>Aix-Marseille University</h1>
-	    			<h2>Master's degree, Informatique</h2>
-	    		</div>
-    			
+    			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
+	    			<h:panelGroup rendered="#{a.type == 'education'}">
+	    				<p:commandButton class="icon-profile custom-button" icon="icon-edit"
+    						action="#{activity.editActivity(a.id)}" update="md-activity" onclick="showEditActivity()"/>
+		    			<h1>#{a.title}</h1>
+		    			<h2>#{a.place}</h2>
+		    			<h3>#{a.monthFrom} #{a.yearFrom} - #{a.monthTo} #{a.yearTo}</h3>
+		    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
+		    		</h:panelGroup>
+		    	</ui:repeat>
     		</div>
     	</div>
     	<div class="block">
     		<h2>
     			Projects
-    			<h:graphicImage class="icon-profile"  rendered="#{user.user.loggedIn}"
-    				library="images" name="plus.svg" alt=""/>
+    			<p:commandButton class="icon-profile custom-button" icon="icon-add"
+    				action="#{activity.initTheActivity('project')}" update="md-activity" onclick="showEditActivity()"/>
     		</h2>
+    		<div class="result">
+    			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
+	    			<h:panelGroup rendered="#{a.type == 'project'}">
+	    				<p:commandButton class="icon-profile custom-button" icon="icon-edit"
+    						action="#{activity.editActivity(a.id)}" update="md-activity" onclick="showEditActivity()"/>
+		    			<h1>#{a.title}</h1>
+		    			<h2>#{a.place}</h2>
+		    			<h3>#{a.monthFrom} #{a.yearFrom} - #{a.monthTo} #{a.yearTo}</h3>
+		    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
+		    		</h:panelGroup>
+		    	</ui:repeat>
+    		</div>
     	</div>
     	
     	<div id="modal-profile" class="modal">
@@ -89,12 +102,11 @@
 			    	Edit
 			    </header>
 			    <div class="scrollable-content">
-			    	<c:set var="p" value="#{person.thePerson}" />
-					<span class="col1 row2 label">First Name *</span><br/>
-					<p:inputText class="col1 row3"  value="#{p.firstname}"/>
+					<span class="col1 row1 label">First Name *</span><br/>
+					<p:inputText class="col1 row2"  value="#{p.firstname}"/>
 					
-					<span class="col2 row2 label">Last Name *</span><br/>
-					<p:inputText  class="col2 row3"  value="#{p.lastname}"/>
+					<span class="col2 row1 label">Last Name *</span><br/>
+					<p:inputText  class="col2 row2"  value="#{p.lastname}"/>
 					
 					<span class="label col1">Headline</span><br/>
 					<p:inputTextarea class="cols13" maxlength="123" autoResize="false"  value="#{p.headline}"/>
@@ -112,7 +124,7 @@
 					<p:inputText class="cols13"  value="#{p.websiteUrl}"/>
 		
 					<span class="label">Birthday</span><br/>
-					<p:calendar class="cols13"  value="#{p.birthday}"/>
+					<p:calendar class="cols13" value="#{p.birthday}" navigator="true" yearRange="c-90:c"  pattern="dd-MM-yyyy" maxdate="today"/>
 		
 					<span class="label">Summary</span><br/>
 					<p:inputTextarea class="cols13" maxlength="500" autoResize="false"  value="#{p.summary}"/>
@@ -125,35 +137,47 @@
 		
 		
 		<div id="modal-activity" class="modal">
-		  <div class="modal-content">
-		  <span class="close" onclick="hideActivityModal()">&#215;</span>
-		    <header>
-		    	Add / Edit
-		    </header>
-		    <div class="scrollable-content">
-				<span class="label">Title</span><br/>
-				<p:inputText class="cols13"/>
-				
-				<span class="label">Company / School</span><br/>
-				<p:inputText  class="cols13"/>
-				
-				<span class="label col1 row5">From</span><br/>
-				<p:inputText class="col1 row6"/>
-				<p:inputText class="col1 row7"/>
-				
-				<span class="label col2 row5">To</span><br/>
-				<p:inputText class="col2 row6"/>
-				<p:inputText class="col2 row7"/>
-	
-				<span class="label">Description</span><br/>
-				<p:inputTextarea class="cols13" maxlength="500" autoResize="false" />
-			</div>
-			<footer>
-				<p:commandButton value="Save"/>
-			</footer>
-		  </div>
+		  <h:form id="md-activity" class="modal-content">
+			  <span class="close" onclick="hideActivityModal()">&#215;</span>
+			    <header>
+			    	Add / Edit
+			    </header>
+			    <div class="scrollable-content">
+			    	<c:set var="theA" value="#{activity.theActivity}" />
+					<span class="label">Title</span><br/>
+					<p:inputText class="cols13" value="#{theA.title}"/>
+					
+					<span class="label">Company / School</span><br/>
+					<p:inputText  class="cols13" value="#{theA.place}"/>
+					
+					<span class="label col1 row5">From</span><br/>
+					<p:selectOneMenu value="#{theA.monthFrom}" class="col1 row6">
+						<c:forEach items="#{user.months}" var="month" varStatus="idx">
+					    	<f:selectItem itemValue="#{idx.index}" itemLabel="#{month}"/>
+					  	</c:forEach>
+			        </p:selectOneMenu>
+					<p:inputText class="col1 row7" value="#{theA.yearFrom}"/>
+					
+					<span class="label col2 row5">To</span><br/>
+					<p:selectOneMenu value="#{theA.monthTo}" class="col2 row6">
+						<c:forEach items="#{user.months}" var="month" varStatus="idx">
+					    	<f:selectItem itemValue="#{idx.index}" itemLabel="#{month}"/>
+					  	</c:forEach>
+			        </p:selectOneMenu>
+					<p:inputText class="col2 row7" value="#{theA.yearTo}"/>
+		
+					<span class="label">Description</span><br/>
+					<p:inputTextarea value="#{theA.description}" class="cols13" maxlength="500" autoResize="false" />
+					
+					<span class="label">Website</span><br/>
+					<p:inputText value="#{theA.websiteUrl}"/>
+				</div>
+				<footer>
+					<p:commandButton value="Save" action="#{person.saveActivity}"/>
+				</footer>
+			  </h:form>
 		</div>
-
+	</ui:fragment>
     </ui:define>
 </ui:composition>
 </html>

@@ -2,12 +2,17 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
+
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 import beans.Person;
 import dao.PersonManager;
@@ -22,7 +27,11 @@ public class PersonController {
 	private String searchQuery;
 	private List<Person> queryResult = new ArrayList<Person>();
 	
+	private LazyDataModel<Person> lazyModel;
 	private Person thePerson = new Person();
+	
+	@ManagedProperty(value="#{activity}")
+	private ActivityController activityController;
 	
 	@PostConstruct
     public void init() {
@@ -50,6 +59,18 @@ public class PersonController {
             p2.setPassword("123");
             mgr.save(p2);
         }
+        setLazyModel(new LazyDataModel<Person>() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public List<Person> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+                List<Person> persons = mgr.findPersonsByName(searchQuery, first, pageSize);
+                lazyModel.setRowCount(persons.size());
+                return persons;
+            }
+        
+            
+        });
     }
 	
 	public Person savePerson(Person person) {
@@ -65,7 +86,7 @@ public class PersonController {
 	}
 	
 	public void findByName(AjaxBehaviorEvent event){
-		queryResult = mgr.findPersonsByName(searchQuery, 8);
+		queryResult = mgr.findPersonsByName(searchQuery, 0, 8);
     }
 	
 	public List<Person> getPersons() {
@@ -105,5 +126,23 @@ public class PersonController {
 		savePerson(thePerson);
 		return "cv?faces-redirect=true";
 	}
+	
+	public void setActivityController(ActivityController ac) {
+		this.activityController = ac;
+	}
+	
+	public String saveActivity() {
+		thePerson.addActivity(activityController.getTheActivity());
+		return activityController.saveTheActivity(thePerson);
+	}
+
+	public LazyDataModel<Person> getLazyModel() {
+		return lazyModel;
+	}
+
+	public void setLazyModel(LazyDataModel<Person> lazyModel) {
+		this.lazyModel = lazyModel;
+	}
+	
 	
 }

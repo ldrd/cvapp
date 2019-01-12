@@ -1,12 +1,11 @@
 package controllers;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import beans.Activity;
+import beans.Person;
 import dao.ActivityManager;
 
 @ManagedBean(name = "activity")
@@ -16,6 +15,8 @@ public class ActivityController {
 	@EJB
 	ActivityManager mgr;
 	
+	private Activity theActivity = new Activity();
+
 	public Activity saveActivity(Activity activity) {
 		return mgr.save(activity);
 	}
@@ -28,7 +29,26 @@ public class ActivityController {
 		mgr.delete(activity);
 	}
 	
-	public List<Activity> findActivitiesByPerson(Long idPerson) {
-		return mgr.findActivitiesByPerson(idPerson);
+	public Activity getTheActivity() {
+		return theActivity;
+	}
+
+	public void editActivity(Long id) {
+		theActivity = getActivity(id);
+	}
+	
+	public void setTheActivity(Activity theActivity) {
+		this.theActivity = theActivity;
+	}
+	
+	public String saveTheActivity(Person person) {
+		theActivity.setPerson(person);
+		saveActivity(theActivity);
+		return "cv?faces-redirect=true";
+	}
+	
+	public void initTheActivity(String type) {
+		this.theActivity = new Activity();
+		theActivity.setType(type);
 	}
 }

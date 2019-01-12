@@ -129,11 +129,13 @@ form h3 {
 	grid-row: 3;
 }
 
+.row4 {
+	grid-row: 4;
+}
+
 .sign-up {
 	margin-top: 20px;
 }
-
-
 
 .search-result {
 	box-shadow: 0 0 0 1px rgba(0,0,0,.15),0 2px 3px rgba(0,0,0,.2);
@@ -155,7 +157,7 @@ form h3 {
 	font-weight: 600;
 	font-size: 1em;
 	margin: 0;
-	line-height: 1.5;
+	line-height: 2;
 	color: #0073b1;
 }
 
@@ -168,23 +170,43 @@ form h3 {
 }
 
 .result h2 {
-	font-size: 0.9em;
+	font-size: 85%;
 	margin: 0;
+	line-height: 1.42857;
 	font-weight: normal;
 	color: rgba(0,0,0,.9);
 }
 
 .result p {
 	margin: 0;
-	font-size: 0.8em;
+	font-size: 62.5%;
+	line-height: 1.33333;
 	color: rgba(0,0,0,.6);
 }
 
-.test {
-	padding: 10px;
-	margin: 0px;
-	padding-bottom: 0;
-	background-color: white;
-	color: rgb(66,103,178);
-	display: inline;
+.signup-form {
+	float: right;
+	width: 500px;
+}
+
+.ui-widget {
+	font-family: "Segoe UI",Roboto,"Helvetica Neue","Fira Sans",Ubuntu,Oxygen,"Oxygen Sans",Cantarell,"Droid Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Emoji","Segoe UI Symbol","Lucida Grande",Helvetica,Arial,sans-serif;
+}
+
+@media only screen and (max-width: 1360px) {
+	#page { display: block; }
+	#content { margin-top: 50px;}
+	#content { min-width: initial; }
+	.signup-form {
+		max-width: 500px;
+		float: none;
+		padding: 20px;
+		margin: auto;
+		width: initial;
+	}
+}
+
+@media only screen and (max-width: 850px) {
+	#content { margin-top: 200px; }
+	#follow { display: none; }
 }

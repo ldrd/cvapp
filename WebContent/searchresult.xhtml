@@ -8,16 +8,23 @@
 
 <ui:composition template="/template/mylayout.xhtml">
     <ui:define name="content">
-        <p:dataScroller value="#{person.queryResult}" var="p" chunkSize="2"
-	      		class="search-result col2 row2">
-	        <div class="result">
-	       		<div>
-	       			<h1><a href="">#{p.lastname}</a></h1>
-	       			<h2>#{p.firstname}</h2>
-	       			<p>#{p.email}</p>
-	       		</div>
-	       	</div>
-	    </p:dataScroller>
+    	<h:form>
+	        <p:dataTable value="#{person.lazyModel}" var="p"
+	        		rows="10" paginator="true"  lazy="true" rowsPerPageTemplate="10,20,30,40,50"
+	        		paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+		      		class="search-result col2 row2">
+		      	<p:column headerText="Id">
+		            <div class="result">
+			       		<div>
+			       			<h1><h:commandLink action="#{person.cv(p.id)}"
+			    				value="#{p.firstname} #{p.lastname}"/></h1>
+			       			<h2>#{p.headline}</h2>
+			       			<p>#{p.address}</p>
+			       		</div>
+			       	</div>
+		        </p:column>
+		    </p:dataTable>
+		</h:form>
     </ui:define>
 </ui:composition>
 </html>

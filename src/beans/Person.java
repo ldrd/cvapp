@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -38,11 +39,6 @@ public class Person implements Serializable {
 	@Column(name = "headline")
 	@Size(max = 123)
 	private String headline;
-	/*
-	 * Validation : regex ? ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$
-	 * UI : p:inputText
-	 * Mandatory : Yes
-	 */
 	
 	@Column(name = "position")
 	@Size(max = 100)
@@ -55,11 +51,6 @@ public class Person implements Serializable {
 	@Column(name= "address")
 	private String address;
 	
-	/*
-	 * Validation : Yes but don't know what to use, regex ?
-	 * UI : p:inputText
-	 * Mandatory : No
-	 */
 	@Column(name = "websiteUrl")
 	private String websiteUrl;
 	
@@ -67,26 +58,15 @@ public class Person implements Serializable {
 	@Size(max = 700) 
 	private String summary;
 	
-	/*
-	 * Validation : None
-	 * UI : Primefaces.Calendar
-	 * Mandatory : Yes
-	 */
 	@Column(name = "birthday")
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	
-	/*
-	 * Validation : None ? or maybe add min chars
-	 * UI : Primefaces.Password (Feedback)
-	 * Mandatory : Yes
-	 * Other : This should be the hash of the password, not the password
-	 */
 	@Column(name = "password")
 	@NotNull
 	private String password;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "person")
 	private Set<Activity> activities;
 
 	public Long getId() {
@@ -129,20 +109,12 @@ public class Person implements Serializable {
 		this.websiteUrl = websiteUrl;
 	}
 
-	/*public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}*/
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
 	}
 	
 	public Set<Activity> getActivities() {
@@ -199,5 +171,9 @@ public class Person implements Serializable {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+
+	public void addActivity(Activity a) {
+		activities.add(a);
 	}
 }

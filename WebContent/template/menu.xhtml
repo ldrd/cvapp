@@ -13,18 +13,21 @@
 	<h:outputScript library="js" name="menu.js" />
 	
 	<div id="menu-content">
+		<c:set var="u" value="#{user.user}" />
 		<h:form>
-			<p:commandLink action="#{user.home}" style="float:left;margin-right:20px">
+			<p:commandLink action="#{user.home}" class="home-button">
 				<h:graphicImage style="width:30px;" library="images" name="home.svg" alt=""/>
 			</p:commandLink>
 		</h:form>
 		<h:form class="search-form">
-		    <p:inputText id="text" class="search-bar" onfocus="showSearchResult()"
-		    	value="#{person.searchQuery}" placeholder="Search">
-		        <p:ajax event="keyup" update="affichage"
-   					listener="#{person.findByName}" /> 
-		    </p:inputText>
-		   <p:commandButton icon="ui-icon-search" action="#{user.searchPersons()}"/>
+			<div class="ui-inputgroup">
+			    <p:inputText id="text" class="search-bar" onfocus="showSearchResult()"
+			    	value="#{person.searchQuery}" placeholder="Search">
+			        <p:ajax event="keyup" update="affichage"
+	   					listener="#{person.findByName}" /> 
+			    </p:inputText>
+			    <p:commandButton icon="ui-icon-search" styleClass="white-button" action="#{user.searchPersons()}"/>
+		    </div>
 		    <h:dataTable id="affichage" class="menu-search" value="#{person.queryResult}" var="p">
 	    		<h:column>
 	    			<h:commandLink action="#{person.cv(p.id)}"
@@ -32,12 +35,12 @@
 			    </h:column>
 		    </h:dataTable>
 		</h:form>
-	    <h:form class="login-form right" rendered="#{!user.user.loggedIn}">
-		    <p:inputText placeholder="Email" value="#{user.user.login}"/>
-		    <p:password placeholder="Password" value="#{user.user.password}"/>
+	    <h:form class="login-form right" rendered="#{!u.loggedIn}">
+		    <p:inputText placeholder="Email" value="#{u.login}"/>
+		    <p:password placeholder="Password" value="#{u.password}"/>
 		    <p:commandButton id="sign-up" value="Log In" action="#{user.login}"/>
 	    </h:form>
-	    <h:form class="login-form right" rendered="#{user.user.loggedIn}">
+	    <h:form class="login-form right" rendered="#{u.loggedIn}">
 		    <p:commandButton id="sign-up" value="Log Out" action="#{user.logout}"/>
 	    </h:form>
     </div>

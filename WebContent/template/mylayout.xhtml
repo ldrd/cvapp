@@ -25,11 +25,14 @@
             </ui:insert>
             <h:messages />
         </div>
-        <div id="follow">
-            <ui:insert name="follow">
-                <ui:include src="follow.xhtml" />
-            </ui:insert>
-        </div>
+        <ui:fragment rendered="#{user.user.loggedIn}">
+        	<div id="follow">
+	            <ui:insert name="follow">
+	                <ui:include src="follow.xhtml" />
+	            </ui:insert>
+	        </div>
+        </ui:fragment>
+        
     </div>
 </h:body>
 </html>

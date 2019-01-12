@@ -2,7 +2,7 @@
 
 <resources>
 
-<Resource id="dataSourceCV" type="javax.sql.DataSource">
+<Resource id="datasourcecv" type="javax.sql.DataSource">
     JdbcDriver org.hsqldb.jdbcDriver
     JdbcUrl jdbc:hsqldb:file:/tmp/cv-db
     UserName sa

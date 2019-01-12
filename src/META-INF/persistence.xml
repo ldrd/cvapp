@@ -4,9 +4,9 @@
           http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
     version="2.0">
 
-    <persistence-unit name="dataCV" transaction-type="JTA">
+    <persistence-unit name="cvdata" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <jta-data-source>dataSourceCV</jta-data-source>
+        <jta-data-source>datasourcecv</jta-data-source>
         <properties>
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />

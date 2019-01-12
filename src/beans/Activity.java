@@ -21,47 +21,37 @@ public class Activity implements Serializable {
 	@GeneratedValue
 	private Long id;
 	
-	/*
-	 * Validation : birthday < year < now
-	 * UI : Primefaces.InputNumber
-	 * Mandatory : Yes
-	 */
+	@Column
+	private int monthFrom;
+	
 	@Column(length = 4)
 	@NotNull
-	private int year;
+	private int yearFrom;
 	
-	/*
-	 * Validation : None
-	 * UI : Primefaces.SelectOneMenu
-	 * Mandatory : Yes
-	 */
+	@Column
+	@NotNull
+	private int monthTo;
+	
+	@Column(length = 4)
+	@NotNull
+	private int yearTo;
+	
 	@Column
 	@NotNull
 	private String type;
 	
-	/*
-	 * Validation : None
-	 * UI : p:inputText
-	 * Mandatory : Yes
-	 */
 	@Column
 	@NotNull @Size(min = 3, max = 100)
 	private String title;
 	
-	/*
-	 * Validation : None
-	 * UI : Primefaces.InputTextarea (Autoresize)
-	 * Mandatory : No
-	 */
 	@Lob
-	@Size(min = 5, max = 4000)
+	@Size(max = 4000)
 	private String description;
 	
-	/*
-	 * Validation : Yes but don't know what to use, regex ?
-	 * UI : p:inputText
-	 * Mandatory : No
-	 */
+	@Column
+	@Size(min=2, max=50)
+	private String place;
+	
 	@Column
 	private String websiteUrl;
 	
@@ -77,12 +67,44 @@ public class Activity implements Serializable {
 		this.id = id;
 	}
 
-	public int getYear() {
-		return year;
+	public int getMonthFrom() {
+		return monthFrom;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setMonthFrom(int monthFrom) {
+		this.monthFrom = monthFrom;
+	}
+
+	public int getYearFrom() {
+		return yearFrom;
+	}
+
+	public void setYearFrom(int yearFrom) {
+		this.yearFrom = yearFrom;
+	}
+
+	public int getMonthTo() {
+		return monthTo;
+	}
+
+	public void setMonthTo(int monthTo) {
+		this.monthTo = monthTo;
+	}
+
+	public int getYearTo() {
+		return yearTo;
+	}
+
+	public void setYearTo(int yearTo) {
+		this.yearTo = yearTo;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	public String getType() {
