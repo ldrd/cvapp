@@ -52,16 +52,17 @@ public class PersonManager {
 	public List<Person> findAll() {
 		return em.createQuery("Select p From Person p", Person.class).getResultList();
 	}
-
+	
 	public List<Person> findPersonsByName(String name, int first, int pageSize) {
 		String q = 	"select p from Person p " +
 					"where lower(concat(p.lastname,' ',p.firstname)) like lower(:name)" +
 					" or lower(concat(p.firstname,' ',p.lastname)) like lower(:name)";
 		TypedQuery<Person> query = em.createQuery(q, Person.class);
-		query.setFirstResult(first);
+		query.setParameter("name", "%" + name + "%");
+		
 		if (pageSize > 0)
 			query.setMaxResults(pageSize);
-		query.setParameter("name", "%" + name + "%");
+		query.setFirstResult(first);
 		
 		return query.getResultList();
 	}

@@ -11,9 +11,10 @@
     	<h:form>
 	        <p:dataTable value="#{person.lazyModel}" var="p"
 	        		rows="10" paginator="true"  lazy="true" rowsPerPageTemplate="10,20,30,40,50"
+	        		currentPageReportTemplate="Showing {startRecord}-{endRecord} out of {totalRecords}"
 	        		paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 		      		class="search-result col2 row2">
-		      	<p:column headerText="Id">
+		      	<p:column>
 		            <div class="result">
 			       		<div>
 			       			<h1><h:commandLink action="#{person.cv(p.id)}"

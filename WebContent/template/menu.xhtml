@@ -31,7 +31,7 @@
 		    <h:dataTable id="affichage" class="menu-search" value="#{person.queryResult}" var="p">
 	    		<h:column>
 	    			<h:commandLink action="#{person.cv(p.id)}"
-	    				value="#{p.firstname} #{p.lastname} #{p.id}"/>
+	    				value="#{p.firstname} #{p.lastname}"/>
 			    </h:column>
 		    </h:dataTable>
 		</h:form>

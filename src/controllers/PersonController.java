@@ -38,7 +38,6 @@ public class PersonController {
 	@PostConstruct
     public void init() {
         if (mgr.findAll().size() == 0) {
-        	System.out.println("Je fais ça");
         	Person p = new Person();
             p.setFirstname("test");
             p.setLastname("test");
@@ -66,6 +65,7 @@ public class PersonController {
             @Override
             public List<Person> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
                 List<Person> persons = mgr.findPersonsByName(searchQuery, first, pageSize);
+                //Je ne sais pas encore comment gérer ça
                 lazyModel.setRowCount(persons.size());
                 return persons;
             }

@@ -8,6 +8,7 @@
 	margin: 0;
 	border: solid rgb(19,55,131) 1px;
 	font-size: 0.9em;
+	z-index: 1;
 }
 
 .login-form .ui-inputfield {
@@ -43,7 +44,7 @@
 }
 
 .search-form tr, tbody{
-	display: block;
+	display: contents;
 }
 
 .search-form td {
@@ -97,7 +98,7 @@
 	}
 	.search-form { width: initial; }
 	.search-form input { width: initial; }
-	.menu-search { width: 182px; position: absolute; z-index:1}
+	.menu-search { width: 212px; position: absolute; z-index:2}
 }
 
 @media only screen and (max-width: 850px) {

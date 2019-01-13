@@ -1,6 +1,5 @@
 package tests;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.ejb.EJB;
