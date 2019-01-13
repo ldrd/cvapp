@@ -114,7 +114,9 @@ public class Person implements Serializable {
 	}
 
 	public void setPassword(String password) {
+		System.out.println("Set pwd " + password);
 		this.password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+		System.out.println("Set pwd2 " + this.password);
 	}
 	
 	public Set<Activity> getActivities() {

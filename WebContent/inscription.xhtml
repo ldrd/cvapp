@@ -8,7 +8,7 @@
 
 <ui:composition template="/template/mylayout.xhtml">
     <ui:define name="content">
-    <ui:fragment rendered="#{!user.user.loggedIn}">
+    <ui:fragment rendered="#{!user.loggedIn}">
         <h:form class="signup-form">
         	<h1>Sign Up</h1> <!-- Inscription -->
         	<h2>It’s free and always will be.</h2> <!-- C'est gratuit (et ça le restera toujours) -->
@@ -28,7 +28,7 @@
 	            </p:inputText>
 	            <p:message for="@previous"/>
 	            <p:inputText class="cols13" placeholder="Email" requiredMessage="Value required"
-	            	value="#{user.user.login}" required="true" validatorMessage="This is not an email address">
+	            	value="#{user.user.email}" required="true" validatorMessage="This is not an email address">
 	            	<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
 	            	<p:clientValidator event="blur"/>
 	            </p:inputText>
@@ -42,7 +42,7 @@
             </div>
              
             <p:commandButton class="sign-up" value="Sign Up" style="margin-top=20px"
-            	action="#{user.signup()}"/>
+            	action="#{user.signup}"/>
         </h:form>
     </ui:fragment>
     </ui:define>

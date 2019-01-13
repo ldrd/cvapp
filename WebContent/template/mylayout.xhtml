@@ -25,7 +25,7 @@
             </ui:insert>
             <h:messages />
         </div>
-        <ui:fragment rendered="#{user.user.loggedIn}">
+        <ui:fragment rendered="#{user.loggedIn}">
         	<div id="follow">
 	            <ui:insert name="follow">
 	                <ui:include src="follow.xhtml" />

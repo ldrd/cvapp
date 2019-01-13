@@ -8,51 +8,48 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import beans.Person;
-import dao.User;
 
 @ManagedBean(name = "user")
 @SessionScoped
 public class UserController {
 	
-	@EJB
-	private User user;
-	
+	private Person user = new Person();
+	private boolean loggedIn;
+
 	@ManagedProperty(value="#{person}")
 	private PersonController personController;
 	
 	public String login() {
-		if (user.login()) {
-			personController.setThePerson(personController.getPerson(user.getId()));
-			return "cv?faces-redirect=true";
-		}
-		return null;
+		if (loggedIn) return null;
+		
+		Person person = personController.findByEmail(user.getEmail());
+        if (person == null) return null;
+        System.out.println(person.getPassword());
+        if (!person.getPassword().equals(user.getPassword())) return null;
+        
+        loggedIn = true;
+        user = person;
+
+        personController.setThePerson(user);
+		return "cv?faces-redirect=true";
 	}
 	
 	public String signup() {
-		Person p = new Person();
-		p.setFirstname(user.getFirstname());
-		p.setLastname(user.getLastname());
-		p.setEmail(user.getLogin());
-		p.setPassword(user.getPassword());
-		personController.savePerson(p);
+		personController.savePerson(user);
 		return login();
 	}
 
 	public String logout() {
-		user.logout();
+		user = new Person();
+		loggedIn = false;
 		return FacesContext.getCurrentInstance().getViewRoot().getViewId() + "?faces-redirect=true";
 		
-	}
-	
-	public User getUser() {
-		return user;
 	}
 	
 	public void setPersonController(PersonController pc) {
@@ -60,16 +57,12 @@ public class UserController {
 	}
 	
 	public String home() {
-		if (user.isLoggedIn()) {
-			personController.setThePerson(personController.getPerson(user.getId()));
+		if (loggedIn) {
+			personController.setThePerson(user);
 			return "cv?faces-redirect=true";
 		}
+		user = new Person();
 		return "inscription?faces-redirect=true";	
-	}
-	
-	public String searchPersons() {
-		personController.findByName();
-		return "searchresult?faces-redirect=true";
 	}
 	
 	public List<String> getMonths() {
@@ -84,5 +77,21 @@ public class UserController {
 		for (int i = 0; i < 12; i++)
 			months.add(invertedMap.get(i));
 		return months;
+	}
+	
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+	
+	public Person getUser() {
+		return user;
+	}
+
+	public void setUser(Person user) {
+		this.user = user;
 	}
 }

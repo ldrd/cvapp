@@ -1,8 +1,15 @@
 package controllers;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 import beans.Activity;
 import beans.Person;
@@ -16,7 +23,7 @@ public class ActivityController {
 	ActivityManager mgr;
 	
 	private Activity theActivity = new Activity();
-
+	
 	public Activity saveActivity(Activity activity) {
 		return mgr.save(activity);
 	}

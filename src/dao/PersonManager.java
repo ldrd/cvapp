@@ -41,11 +41,12 @@ public class PersonManager {
 		return findPersonsByName(name, 0, 0);
 	}
 	
-	public List<Person> findPersonsByEmail(String email) {
+	public Person findPersonByEmail(String email) {
 		String q = "Select p From Person p where email = :email";
 		TypedQuery<Person> query = em.createQuery(q, Person.class);
 		query.setParameter("email", email);
-		return query.getResultList();
+		List<Person> result = query.getResultList();
+		return result.size() == 1 ? result.get(0) : null;
 	}
 
 	public List<Person> findAll() {

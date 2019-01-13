@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import org.primefaces.model.SortOrder;
 
 import beans.Person;
 import dao.PersonManager;
+import io.codearte.jfairy.Fairy;
 
 @ManagedBean(name = "person")
 @SessionScoped
@@ -35,7 +37,6 @@ public class PersonController {
 	
 	@PostConstruct
     public void init() {
-        System.out.println("Create " + this);
         if (mgr.findAll().size() == 0) {
         	System.out.println("Je fais ça");
         	Person p = new Person();
@@ -44,20 +45,20 @@ public class PersonController {
             p.setEmail("test@free.fr");
             p.setPassword("1");
             mgr.save(p);
-        	
-            Person p1 = new Person();
-            p1.setFirstname("Loic");
-            p1.setLastname("Drouard");
-            p1.setEmail("loic.drouard@free.fr");
-            p1.setPassword("12");
-            mgr.save(p1);
             
-            Person p2 = new Person();
-            p2.setFirstname("Lina");
-            p2.setLastname("Benhamza");
-            p2.setEmail("lina.benhamza@free.fr");
-            p2.setPassword("123");
-            mgr.save(p2);
+            Fairy fairy = Fairy.create(Locale.forLanguageTag("fr"));
+            
+            for (int i = 0; i < 100_000; i++) {
+            	io.codearte.jfairy.producer.person.Person fPerson = fairy.person();
+            	Person person = new Person();
+            	
+            	person.setEmail(fPerson.getEmail());
+            	person.setFirstname(fPerson.getFirstName());
+            	person.setLastname(fPerson.getLastName());
+            	person.setPassword(fPerson.getPassword());
+            	if (mgr.findPersonByEmail(person.getEmail()) == null)
+            		mgr.save(person);
+            }
         }
         setLazyModel(new LazyDataModel<Person>() {
             private static final long serialVersionUID = 1L;
@@ -81,13 +82,17 @@ public class PersonController {
 		return mgr.find(id);
 	}
 	
-	public void findByName() {
-		queryResult = mgr.findPersonsByName(searchQuery);
+	public String searchByName() {
+		return "searchresult?faces-redirect=true";
 	}
 	
 	public void findByName(AjaxBehaviorEvent event){
 		queryResult = mgr.findPersonsByName(searchQuery, 0, 8);
     }
+	
+	public Person findByEmail(String email) {
+		return mgr.findPersonByEmail(email);
+	}
 	
 	public List<Person> getPersons() {
 		return mgr.findAll();

@@ -26,7 +26,7 @@
 			        <p:ajax event="keyup" update="affichage"
 	   					listener="#{person.findByName}" /> 
 			    </p:inputText>
-			    <p:commandButton icon="ui-icon-search" styleClass="white-button" action="#{user.searchPersons()}"/>
+			    <p:commandButton icon="ui-icon-search" styleClass="white-button" action="#{person.searchByName}"/>
 		    </div>
 		    <h:dataTable id="affichage" class="menu-search" value="#{person.queryResult}" var="p">
 	    		<h:column>
@@ -35,12 +35,12 @@
 			    </h:column>
 		    </h:dataTable>
 		</h:form>
-	    <h:form class="login-form right" rendered="#{!u.loggedIn}">
-		    <p:inputText placeholder="Email" value="#{u.login}"/>
+	    <h:form class="login-form right" rendered="#{!user.loggedIn}">
+		    <p:inputText placeholder="Email" value="#{u.email}"/>
 		    <p:password placeholder="Password" value="#{u.password}"/>
 		    <p:commandButton id="sign-up" value="Log In" action="#{user.login}"/>
 	    </h:form>
-	    <h:form class="login-form right" rendered="#{u.loggedIn}">
+	    <h:form class="login-form right" rendered="#{user.loggedIn}">
 		    <p:commandButton id="sign-up" value="Log Out" action="#{user.logout}"/>
 	    </h:form>
     </div>
