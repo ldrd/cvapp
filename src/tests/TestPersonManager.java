@@ -1,17 +1,13 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
+import javax.ejb.EJB;
 import javax.ejb.embeddable.EJBContainer;
-import javax.inject.Inject;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import beans.Person;
@@ -19,81 +15,85 @@ import dao.PersonManager;
 
 public class TestPersonManager {
 	
-    static EJBContainer container;
-    static PersonManager mgr;
-    
-    @BeforeClass
-    static public void setUp() throws Exception {
-    	container = EJBContainer.createEJBContainer();
-        final String name = "java:global/cvapp/PersonManager";
-        mgr = (PersonManager) container.getContext().lookup(name);
-        //EJBContainer.createEJBContainer().getContext().bind("inject", this);
-    }
-
-    @AfterClass
-    static public void tearDown() throws Exception {
-    	container.close();
-    }
+	@EJB
+    PersonManager mgr;
     
     @Before
-    public void before() throws Exception {
-            container.getContext().bind("inject", this);
+    public void setUp() throws Exception {
+        EJBContainer.createEJBContainer().getContext().bind("inject", this);
     }
 
     @After
-    public void after() throws Exception {
-            container.getContext().unbind("inject");
+    public void tearDown() throws Exception {
+        EJBContainer.createEJBContainer().close();
     }
 
-    @Inject
-    Person p;
-
     @Test
-    public void testFindPersons() {
+    public void testFindAllPersons() {
         assertNotNull(mgr.findAll());
     }
     
     @Test
-    public void testAdd() {
-//    	p.setFirstname("testFirstName");
-//    	p.setLastname("testLastName");
-//    	p.setEmail("test@test.test");
-//    	p.setPassword("testPwd");
-//    	int count = mgr.findAll().size();
-//    	p = mgr.save(p);
-//    	assertEquals(mgr.findAll().size(), count + 1);
+    public void testAddPerson() {
+    	int count = mgr.findAll().size();
+    	Person p = new Person();
+    	p.setEmail("tadd@t.t");
+    	p.setFirstname("testF");
+    	p.setLastname("testL");
+    	p.setPassword("test");
+    	mgr.save(p);
+    	assertEquals(count + 1, mgr.findAll().size());
     }
     
     @Test
-    public void testUpdate() {
-//    	Person firstPerson = mgr.findAll().get(0);
-//    	firstPerson.setFirstname("updatedFirstName");
-//    	firstPerson = mgr.save(firstPerson);
-//    	assertEquals(mgr.find(firstPerson.getId()).getFirstname(), "updatedFirstName");
+    public void testUpdatePerson() {
+    	Person p = new Person();
+    	p.setEmail("tupdate@t.t");
+    	p.setFirstname("testF");
+    	p.setLastname("testL");
+    	p.setPassword("test");
+    	p = mgr.save(p);
+    	p.setFirstname("testFirst");
+    	p = mgr.save(p);
+    	assertEquals("testFirst", mgr.findPersonByEmail("tupdate@t.t").getFirstname());
     }
     
     @Test
-    public void testDelete() {
-    	
+    public void testDeletePerson() {
+    	int count = mgr.findAll().size();
+    	Person p = new Person();
+    	p.setEmail("tdelete@t.t");
+    	p.setFirstname("testF");
+    	p.setLastname("testL");
+    	p.setPassword("test");
+    	p = mgr.save(p);
+    	mgr.delete(p);
+    	assertEquals(count, mgr.findAll().size());
     }
     
-    @Test
-    public void testFindByName1() {
-    	List<Person> ps = mgr.findPersonsByName("First Last");
-    	assertEquals(1, ps.size());
+    public void testFindPersonByEmail() {
+    	Person p = new Person();
+    	p.setEmail("temail@t.t");
+    	p.setFirstname("testF");
+    	p.setLastname("testL");
+    	p.setPassword("test");
+    	p = mgr.save(p);
+    	assertEquals(p.getId(), mgr.findPersonByEmail("temail@t.t").getId());
     }
     
-    @Test
-    public void testFindByName2() {
-    	List<Person> ps = mgr.findPersonsByName("testFirstName te");
-    	assertEquals(1, ps.size());
-    	
+    public void testFindPersonByName() {
+    	Person p1 = new Person();
+    	p1.setEmail("tname1@t.t");
+    	p1.setFirstname("xyz");
+    	p1.setLastname("testL");
+    	p1.setPassword("test");
+    	p1 = mgr.save(p1);
+    	Person p2 = new Person();
+    	p2.setEmail("tname1@t.t");
+    	p2.setFirstname("xyy");
+    	p2.setLastname("testL");
+    	p2.setPassword("test");
+    	p2 = mgr.save(p2);
+    	assertEquals(2, mgr.findPersonsByName("xy").size());
     }
-    
-    @Test
-    public void testFindByName3() {
-    	List<Person> ps = mgr.findPersonsByName("testLastName te");
-    	assertEquals(1, ps.size());
-    }
-
 }

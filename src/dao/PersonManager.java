@@ -54,7 +54,6 @@ public class PersonManager {
 	}
 
 	public List<Person> findPersonsByName(String name, int first, int pageSize) {
-		System.out.println(first + " " + pageSize);
 		String q = 	"select p from Person p " +
 					"where lower(concat(p.lastname,' ',p.firstname)) like lower(:name)" +
 					" or lower(concat(p.firstname,' ',p.lastname)) like lower(:name)";

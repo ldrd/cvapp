@@ -1,8 +1,11 @@
 package dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import beans.Activity;
 
@@ -27,5 +30,18 @@ public class ActivityManager {
 	public void delete(Activity activity) {
 		activity = save(activity);
 		em.remove(activity);
+	}
+	
+	//Pas encore intégré dans l'interface client
+	public List<Activity> findActivitiesByName(String name, int first, int pageSize) {
+		String q = 	"select a from Activity a " +
+				"where lower(a.title) like lower(:name)";
+		TypedQuery<Activity> query = em.createQuery(q, Activity.class);
+		query.setFirstResult(first);
+		if (pageSize > 0)
+			query.setMaxResults(pageSize);
+		query.setParameter("name", "%" + name + "%");
+		
+		return query.getResultList();
 	}
 }
