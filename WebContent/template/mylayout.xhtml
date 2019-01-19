@@ -11,6 +11,7 @@
     
 </h:head>
 <h:body>
+	<f:view locale="#{language.locale}" encoding="UTF-8" contentType="text/html">
 	<h:outputStylesheet library="css" name="style.css" />
     <div id="page">
         <div id="menu">
@@ -34,5 +35,11 @@
         </ui:fragment>
         
     </div>
+    <div id="footer">
+        <ui:insert name="footer">
+            <ui:include src="footer.xhtml" />
+        </ui:insert>
+    </div>
+    </f:view>
 </h:body>
 </html>

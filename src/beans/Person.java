@@ -29,11 +29,11 @@ public class Person implements Serializable {
 	private String picture;
 	
 	@Column(name = "lastname")
-	@NotNull @Size(min = 2, max = 50)
+	@NotNull @Size(min = 1)
 	private String lastname;
 	
 	@Column(name = "firstname")
-	@NotNull @Size(min = 2, max = 50)
+	@NotNull @Size(min = 1)
 	private String firstname;
 	
 	@Column(name = "headline")

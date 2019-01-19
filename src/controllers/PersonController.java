@@ -65,7 +65,7 @@ public class PersonController {
             @Override
             public List<Person> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
                 List<Person> persons = mgr.findPersonsByName(searchQuery, first, pageSize);
-                //Je ne sais pas encore comment gérer ça
+                //Je ne sais pas encore comment gï¿½rer ï¿½a
                 lazyModel.setRowCount(persons.size());
                 return persons;
             }

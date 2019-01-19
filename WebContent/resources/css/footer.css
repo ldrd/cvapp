@@ -1,0 +1,15 @@
+#footer {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+#footer a {
+	margin-left: 15px;
+	font-size: 0.9em;
+	color: #365899;
+}
+
+#footer a:hover {
+	text-decoration: underline;
+}

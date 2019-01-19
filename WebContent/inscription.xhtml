@@ -10,20 +10,18 @@
     <ui:define name="content">
     <ui:fragment rendered="#{!user.loggedIn}">
         <h:form class="signup-form">
-        	<h1>Sign Up</h1> <!-- Inscription -->
-        	<h2>It’s free and always will be.</h2> <!-- C'est gratuit (et ça le restera toujours) -->
+        	<h1>#{messages.titleInscription}</h1> <!-- Inscription -->
+        	<h2>#{messages.subtitleInscription}</h2> <!-- C'est gratuit (et ça le restera toujours) -->
             <div id="sign-up-grid">
-	            <p:inputText id="firstname-insc" class="col1 row1" placeholder="First name" requiredMessage="Value required"
+	            <p:inputText id="firstname-insc" class="col1 row1" placeholder="#{messages.firstname}" requiredMessage="Value required"
 	            	value="#{user.user.firstname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
-	            	<f:validateLength minimum="2" maximum="50" />
-	            	<f:validateRegex pattern="^[a-zA-Z]+$" />
+	            	<f:validateLength minimum="1"/>
                 	<p:clientValidator event="blur"/>
 	            </p:inputText>
 	           <p:message for="@previous"/>
-	            <p:inputText class="col2 row1" placeholder="Last name" requiredMessage="Value required"
+	            <p:inputText class="col2 row1" placeholder="#{messages.lastname}" requiredMessage="Value required"
 	            	value="#{user.user.lastname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
-	            	<f:validateLength minimum="2" maximum="50" />
-	            	<f:validateRegex pattern="^[a-zA-Z]+$" />
+	            	<f:validateLength minimum="1"/>
                 	<p:clientValidator event="blur"/>
 	            </p:inputText>
 	            <p:message for="@previous"/>
@@ -33,7 +31,7 @@
 	            	<p:clientValidator event="blur"/>
 	            </p:inputText>
 	            <p:message for="@previous" class="cols13"/>
-	            <p:password class="cols13" placeholder="New password" requiredMessage="Value required"
+	            <p:password class="cols13" placeholder="#{messages.newPassword}" requiredMessage="Value required"
 	            	value="#{user.user.password}" required="true" validatorMessage="Should be at least 6 characters">
 	            	<f:validateLength minimum="6"/>
 	            	<p:clientValidator event="blur"/>
@@ -41,7 +39,7 @@
 	            <p:message for="@previous" class="cols13"/>
             </div>
              
-            <p:commandButton class="sign-up" value="Sign Up" style="margin-top=20px"
+            <p:commandButton class="sign-up" value="#{messages.signup}"
             	action="#{user.signup}"/>
         </h:form>
     </ui:fragment>
