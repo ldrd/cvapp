@@ -28,16 +28,16 @@
     		</div>
     		<div id="sub-infos">
     			<span class="position">#{p.position}</span><br/>
-    			Email :
+    			#{messages.email} :
     			<span class="email">#{p.email}</span><br/>
-    			Birthday : 
+    			#{messages.birthday} : 
     			<span class="birthday">#{p.birthday.date} February #{p.birthday.year}</span>
     		</div>
     		
     	</div>
     	<div class="block">
     		<h2>
-    			Experiences
+    			#{messages.experiences}
     			<p:commandButton class="icon-profile custom-button" icon="icon-add"
     				action="#{activity.initTheActivity('experience')}" update="md-activity" onclick="showEditActivity()"/>
     		</h2>
@@ -58,7 +58,7 @@
     	</div>
     	<div class="block">
     		<h2>
-    			Education
+    			#{messages.education}
     			<p:commandButton class="icon-profile custom-button" icon="icon-add"
     				action="#{activity.initTheActivity('education')}" update="md-activity" onclick="showEditActivity()"/>
     		</h2>
@@ -77,7 +77,7 @@
     	</div>
     	<div class="block">
     		<h2>
-    			Projects
+    			#{messages.projects}
     			<p:commandButton class="icon-profile custom-button" icon="icon-add"
     				action="#{activity.initTheActivity('project')}" update="md-activity" onclick="showEditActivity()"/>
     		</h2>
@@ -99,38 +99,38 @@
 			<h:form class="modal-content">
 			  	<span class="close" onclick="hideProfileModal()">&#215;</span>
 			    <header>
-			    	Edit
+			    	#{messages.edit}
 			    </header>
 			    <div class="scrollable-content">
-					<span class="col1 row1 label">First Name *</span><br/>
+					<span class="col1 row1 label">#{messages.firstname} *</span><br/>
 					<p:inputText class="col1 row2"  value="#{p.firstname}"/>
 					
-					<span class="col2 row1 label">Last Name *</span><br/>
+					<span class="col2 row1 label">#{messages.lastname} *</span><br/>
 					<p:inputText  class="col2 row2"  value="#{p.lastname}"/>
 					
-					<span class="label col1">Headline</span><br/>
+					<span class="label col1">#{messages.headline}</span><br/>
 					<p:inputTextarea class="cols13" maxlength="123" autoResize="false"  value="#{p.headline}"/>
 					
-					<span class="label">Current position</span><br/>
+					<span class="label">#{messages.currentPosition}</span><br/>
 					<p:inputText class="cols13"  value="#{p.position}"/>
 		
-					<span class="label">Address</span><br/>
+					<span class="label">#{messages.adress}</span><br/>
 					<p:inputText class="cols13" value="#{p.address}"/>
 					
-					<span class="label">Email *</span><br/>
+					<span class="label">#{messages.email} *</span><br/>
 					<p:inputText class="cols13" value="#{p.email}"/>
 		
-					<span class="label">Website</span><br/>
+					<span class="label">#{messages.website}</span><br/>
 					<p:inputText class="cols13"  value="#{p.websiteUrl}"/>
 		
-					<span class="label">Birthday</span><br/>
+					<span class="label">#{messages.birthday}</span><br/>
 					<p:calendar class="cols13" value="#{p.birthday}" navigator="true" yearRange="c-90:c"  pattern="dd-MM-yyyy" maxdate="today"/>
 		
-					<span class="label">Summary</span><br/>
+					<span class="label">#{messages.summary}</span><br/>
 					<p:inputTextarea class="cols13" maxlength="500" autoResize="false"  value="#{p.summary}"/>
 				</div>
 				<footer>
-					<p:commandButton id="save-profile" value="Save" action="#{person.saveThePerson}"/>
+					<p:commandButton id="save-profile" value="#{messages.save}" action="#{person.saveThePerson}"/>
 				</footer>
 			</h:form>
 		</div>
@@ -140,17 +140,17 @@
 		  <h:form id="md-activity" class="modal-content">
 			  <span class="close" onclick="hideActivityModal()">&#215;</span>
 			    <header>
-			    	Add / Edit
+			    	#{messages.add_edit}
 			    </header>
 			    <div class="scrollable-content">
 			    	<c:set var="theA" value="#{activity.theActivity}" />
-					<span class="label">Title</span><br/>
+					<span class="label">#{messages.title}</span><br/>
 					<p:inputText class="cols13" value="#{theA.title}"/>
 					
-					<span class="label">Company / School</span><br/>
+					<span class="label">#{messages.company_school}</span><br/>
 					<p:inputText  class="cols13" value="#{theA.place}"/>
 					
-					<span class="label col1 row5">From</span><br/>
+					<span class="label col1 row5">#{messages.from}</span><br/>
 					<p:selectOneMenu value="#{theA.monthFrom}" class="col1 row6">
 						<c:forEach items="#{user.months}" var="month" varStatus="idx">
 					    	<f:selectItem itemValue="#{idx.index}" itemLabel="#{month}"/>
@@ -158,7 +158,7 @@
 			        </p:selectOneMenu>
 					<p:inputText class="col1 row7" value="#{theA.yearFrom}"/>
 					
-					<span class="label col2 row5">To</span><br/>
+					<span class="label col2 row5">#{messages.to}</span><br/>
 					<p:selectOneMenu value="#{theA.monthTo}" class="col2 row6">
 						<c:forEach items="#{user.months}" var="month" varStatus="idx">
 					    	<f:selectItem itemValue="#{idx.index}" itemLabel="#{month}"/>
@@ -166,14 +166,14 @@
 			        </p:selectOneMenu>
 					<p:inputText class="col2 row7" value="#{theA.yearTo}"/>
 		
-					<span class="label">Description</span><br/>
+					<span class="label">#{messages.description}</span><br/>
 					<p:inputTextarea value="#{theA.description}" class="cols13" maxlength="500" autoResize="false" />
 					
-					<span class="label">Website</span><br/>
+					<span class="label">#{messages.website}</span><br/>
 					<p:inputText value="#{theA.websiteUrl}"/>
 				</div>
 				<footer>
-					<p:commandButton value="Save" action="#{person.saveActivity}"/>
+					<p:commandButton value="#{messages.save}" action="#{person.saveActivity}"/>
 				</footer>
 			  </h:form>
 		</div>

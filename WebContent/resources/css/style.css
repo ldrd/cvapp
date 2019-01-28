@@ -47,21 +47,6 @@ a {
 	color: rgba(0,0,0,.6);
 }
 
-#personal-infos {
-	display: grid;
-	grid-template-columns: 70% 30%;
-	grid-gap: 10px;	
-}
-
-#sub-infos {
-	margin: auto;
-	font-weight: 600;
-}
-
-#sub-infos span:not(.position) {
-	font-weight: normal;
-}
-
 #content {
 	grid-row: 2;
 	grid-column: 2;
@@ -193,7 +178,7 @@ form h3 {
 	font-family: "Segoe UI",Roboto,"Helvetica Neue","Fira Sans",Ubuntu,Oxygen,"Oxygen Sans",Cantarell,"Droid Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Emoji","Segoe UI Symbol","Lucida Grande",Helvetica,Arial,sans-serif;
 }
 
-@media only screen and (max-width: 1360px) {
+@media only screen and (max-width: 1450px) {
 	#page { display: block; }
 	#content { margin-top: 50px;}
 	#content { min-width: initial; }
@@ -206,7 +191,7 @@ form h3 {
 	}
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 895px) {
 	#content { margin-top: 200px; }
 	#follow { display: none; }
 }

@@ -89,7 +89,7 @@
     border-color: var(--input-hover-border-color, #ccc);
 }
 
-@media only screen and (max-width: 1360px) {
+@media only screen and (max-width: 1450px) {
 	#menu-content {
 		margin-left: 10px;
 		margin-right: 10px;
@@ -101,7 +101,7 @@
 	.menu-search { width: 212px; position: absolute; z-index:2}
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 895px) {
 	#menu { height: initial; min-width: initial; }
 	#menu-content { min-width: initial; margin-bottom: 10px; text-align: center; }
 	#menu .right { float: initial; }

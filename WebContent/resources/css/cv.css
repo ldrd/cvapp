@@ -99,3 +99,23 @@
 .custom-button .ui-button-text {
 	padding: 0;
 }
+
+#personal-infos {
+	display: grid;
+	grid-template-columns: 70% 30%;
+	grid-gap: 10px;	
+}
+
+#sub-infos {
+	margin: auto;
+	font-weight: 600;
+}
+
+#sub-infos span:not(.position) {
+	font-weight: normal;
+}
+
+@media only screen and (max-width: 895px) {
+	#personal-infos { min-width: initial; grid-template-columns: 90% 10%; }
+	#sub-infos { grid-column: 1; margin: 0; }
+}
