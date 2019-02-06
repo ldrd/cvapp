@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import javax.ejb.Stateful;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -17,6 +18,7 @@ import beans.Person;
 
 @ManagedBean(name = "user")
 @SessionScoped
+@Stateful
 public class UserController {
 	
 	private Person user = new Person();
@@ -30,7 +32,6 @@ public class UserController {
 		
 		Person person = personController.findByEmail(user.getEmail());
         if (person == null) return null;
-        System.out.println(person.getPassword());
         if (!person.getPassword().equals(user.getPassword())) return null;
         
         loggedIn = true;

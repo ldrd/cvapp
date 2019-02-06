@@ -14,11 +14,11 @@
     	
     	<c:set var="p" value="#{person.thePerson}" />
     	<div id="personal-infos" class="block">
-    		<h:graphicImage style="width:160px"
-    					library="images" name="user.svg" alt=""/>
+
     		<div class="col2">
     			<h:graphicImage class="icon-profile" onclick="showEditProfile()"
-    				library="images" name="edit.svg" alt=""/>
+    				library="images" name="edit.svg" alt=""
+    				rendered="#{p.id == user.user.id}"/>
     		</div>
     		<div class="col1">
     			<h1>#{p.firstname} #{p.lastname}</h1>
@@ -39,14 +39,17 @@
     		<h2>
     			#{messages.experiences}
     			<p:commandButton class="icon-profile custom-button" icon="icon-add"
-    				action="#{activity.initTheActivity('experience')}" update="md-activity" onclick="showEditActivity()"/>
+    				action="#{activity.initTheActivity('experience')}" update="md-activity"
+    				onclick="showEditActivity()"
+    				rendered="#{p.id == user.user.id}"/>
     		</h2>
     		
     		<div class="result">
     			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
 	    			<h:panelGroup rendered="#{a.type == 'experience'}">
 	    				<p:commandButton class="icon-profile custom-button" icon="icon-edit"
-    						action="#{activity.editActivity(a.id)}" update="md-activity" onclick="showEditActivity()"/>
+    						action="#{activity.editActivity(a.id)}" update="md-activity"
+    						onclick="showEditActivity()"/>
 		    			<h1>#{a.title}</h1>
 		    			<h2>#{a.place}</h2>
 		    			<h3>#{a.monthFrom} #{a.yearFrom} - #{a.monthTo} #{a.yearTo}</h3>
@@ -60,7 +63,9 @@
     		<h2>
     			#{messages.education}
     			<p:commandButton class="icon-profile custom-button" icon="icon-add"
-    				action="#{activity.initTheActivity('education')}" update="md-activity" onclick="showEditActivity()"/>
+    				action="#{activity.initTheActivity('education')}" update="md-activity"
+    				onclick="showEditActivity()"
+    				rendered="#{p.id == user.user.id}"/>
     		</h2>
     		<div class="result">
     			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
@@ -79,7 +84,9 @@
     		<h2>
     			#{messages.projects}
     			<p:commandButton class="icon-profile custom-button" icon="icon-add"
-    				action="#{activity.initTheActivity('project')}" update="md-activity" onclick="showEditActivity()"/>
+    				action="#{activity.initTheActivity('project')}" update="md-activity"
+    				onclick="showEditActivity()"
+    				rendered="#{p.id == user.user.id}"/>
     		</h2>
     		<div class="result">
     			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
@@ -174,6 +181,7 @@
 				</div>
 				<footer>
 					<p:commandButton value="#{messages.save}" action="#{person.saveActivity}"/>
+					<p:commandButton value="#{messages.delete}" action="#{activity.deleteActivity}" rendered="#{theA.id}"/>
 				</footer>
 			  </h:form>
 		</div>

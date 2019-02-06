@@ -8,6 +8,8 @@
 
 <ui:composition template="/template/mylayout.xhtml">
     <ui:define name="content">
+    	<h:outputScript library="js" name="cv.js" />
+    	<h:outputStylesheet library="css" name="cv.css" />
     	<h:form>
 	        <p:dataTable value="#{person.lazyModel}" var="p"
 	        		rows="10" paginator="true"  lazy="true" rowsPerPageTemplate="10,20,30,40,50"
@@ -27,6 +29,49 @@
 		        </p:column>
 		    </p:dataTable>
 		</h:form>
+		<h:form class="form-button-add-account">
+			<p:commandButton class="button-add-account" value="#{messages.create}" onclick="showAddPerson()"/>
+    	</h:form>
+    	
+    	
+    	<div id="modal-person" class="modal">
+		  <h:form id="md-person" class="modal-content">
+			  <span class="close" onclick="hidePersonModal()">&#215;</span>
+			    <header>
+			    	#{messages.titleInscription}
+			    </header>
+			    <div class="scrollable-content">
+			    	<c:set var="p" value="#{person.thePerson}" />
+					<p:inputText id="firstname-insc" class="col1 row1" placeholder="#{messages.firstname}" requiredMessage="Value required"
+		            	value="#{p.firstname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
+		            	<f:validateLength minimum="1"/>
+	                	<p:clientValidator event="blur"/>
+		            </p:inputText>
+		           <p:message for="@previous"/>
+		            <p:inputText class="col2 row1" placeholder="#{messages.lastname}" requiredMessage="Value required"
+		            	value="#{p.lastname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
+		            	<f:validateLength minimum="1"/>
+	                	<p:clientValidator event="blur"/>
+		            </p:inputText>
+		            <p:message for="@previous"/>
+		            <p:inputText class="cols13" placeholder="Email" requiredMessage="Value required"
+		            	value="#{p.email}" required="true" validatorMessage="This is not an email address">
+		            	<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+		            	<p:clientValidator event="blur"/>
+		            </p:inputText>
+		            <p:message for="@previous" class="cols13"/>
+		            <p:password class="cols13" placeholder="#{messages.newPassword}" requiredMessage="Value required"
+		            	value="#{p.password}" required="true" validatorMessage="Should be at least 6 characters">
+		            	<f:validateLength minimum="6"/>
+		            	<p:clientValidator event="blur"/>
+		            </p:password>
+		            <p:message for="@previous" class="cols13"/>
+	            </div>
+				<footer>
+					<p:commandButton value="#{messages.create}" action="#{person.saveThePerson}"/>
+				</footer>
+			  </h:form>
+		</div>
     </ui:define>
 </ui:composition>
 </html>

@@ -34,7 +34,9 @@ public class ActivityController {
 	}
 
 	public void editActivity(Long id) {
+		System.out.println(id);
 		theActivity = getActivity(id);
+		System.out.println(theActivity);
 	}
 	
 	public void setTheActivity(Activity theActivity) {
@@ -50,5 +52,10 @@ public class ActivityController {
 	public void initTheActivity(String type) {
 		this.theActivity = new Activity();
 		theActivity.setType(type);
+	}
+	
+	public String deleteTheActivity() {
+		mgr.delete(theActivity);
+		return "cv?faces-redirect=true";
 	}
 }

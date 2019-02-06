@@ -32,7 +32,7 @@ public class ActivityManager {
 		em.remove(activity);
 	}
 	
-	//Pas encore intégré dans l'interface client
+	//Pas encore intÃ©grÃ© dans l'interface client
 	public List<Activity> findActivitiesByName(String name, int first, int pageSize) {
 		String q = 	"select a from Activity a " +
 				"where lower(a.title) like lower(:name)";

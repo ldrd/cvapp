@@ -10,8 +10,8 @@
     <ui:define name="content">
     <ui:fragment rendered="#{!user.loggedIn}">
         <h:form class="signup-form">
-        	<h1>#{messages.titleInscription}</h1> <!-- Inscription -->
-        	<h2>#{messages.subtitleInscription}</h2> <!-- C'est gratuit (et ça le restera toujours) -->
+        	<h1>#{messages.titleInscription}</h1>
+        	<h2>#{messages.subtitleInscription}</h2>
             <div id="sign-up-grid">
 	            <p:inputText id="firstname-insc" class="col1 row1" placeholder="#{messages.firstname}" requiredMessage="Value required"
 	            	value="#{user.user.firstname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
