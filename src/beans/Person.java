@@ -176,4 +176,8 @@ public class Person implements Serializable {
 	public void addActivity(Activity a) {
 		activities.add(a);
 	}
+	
+	public void removeActivity(Activity a) {
+		activities.remove(a);
+	}
 }

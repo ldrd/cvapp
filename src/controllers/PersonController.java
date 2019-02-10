@@ -3,18 +3,16 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.model.LazyDataModel;
-import org.primefaces.model.SortOrder;
 
+import beans.Activity;
 import beans.Person;
 import dao.PersonManager;
 import io.codearte.jfairy.Fairy;
@@ -25,8 +23,7 @@ public class PersonController {
 	
 	@EJB
 	PersonManager mgr;
-	
-	private String searchQuery;
+
 	private List<Person> queryResult = new ArrayList<Person>();
 	
 	private LazyDataModel<Person> lazyModel;
@@ -37,12 +34,12 @@ public class PersonController {
 	
 	@PostConstruct
     public void init() {
-        if (mgr.findAll().isEmpty()) {
+        if (mgr.countPersons() == 0) {
         	Person p = new Person();
             p.setFirstname("test");
             p.setLastname("test");
             p.setEmail("test@free.fr");
-            p.setPassword("1");
+            p.setPassword("123456");
             mgr.save(p);
             
             Fairy fairy = Fairy.create(Locale.forLanguageTag("fr"));
@@ -59,20 +56,6 @@ public class PersonController {
             		mgr.save(person);
             }
         }
-        setLazyModel(new LazyDataModel<Person>() {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public List<Person> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-                List<Person> persons = mgr.findPersonsByName(searchQuery, first, pageSize);
-                int countPersons = Math.toIntExact(mgr.countPersonsByName(searchQuery));
-                System.out.println(countPersons);
-                lazyModel.setRowCount(countPersons);
-                return persons;
-            }
-        
-            
-        });
     }
 	
 	public Person savePerson(Person person) {
@@ -88,7 +71,7 @@ public class PersonController {
 		return "searchresult?faces-redirect=true";
 	}
 	
-	public void findByName(AjaxBehaviorEvent event){
+	public void findByName(String searchQuery){
 		queryResult = mgr.findPersonsByName(searchQuery, 0, 8);
     }
 	
@@ -98,14 +81,6 @@ public class PersonController {
 	
 	public List<Person> getPersons() {
 		return mgr.findAll();
-	}
-
-	public String getSearchQuery() {
-		return searchQuery;
-	}
-
-	public void setSearchQuery(String searchQuery) {
-		this.searchQuery = searchQuery;
 	}
 
 	public List<Person> getQueryResult() {
@@ -141,6 +116,14 @@ public class PersonController {
 	public String saveActivity() {
 		thePerson.addActivity(activityController.getTheActivity());
 		return activityController.saveTheActivity(thePerson);
+	}
+	
+	public String deleteActivity(Long id) {
+		Activity a = activityController.getActivity(id);
+		activityController.deleteActivity(a);
+		thePerson.removeActivity(a);
+		thePerson = mgr.save(thePerson);
+		return "cv?faces-redirect=true";
 	}
 
 	public LazyDataModel<Person> getLazyModel() {

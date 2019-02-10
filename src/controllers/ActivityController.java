@@ -1,8 +1,11 @@
 package controllers;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import org.primefaces.model.LazyDataModel;
 
 import beans.Activity;
 import beans.Person;
@@ -17,6 +20,14 @@ public class ActivityController {
 	
 	private Activity theActivity = new Activity();
 	
+	private LazyDataModel<Activity> lazyModel;
+	
+	@PostConstruct
+    public void init() {
+		System.out.println("init activity controller");
+		
+	}
+
 	public Activity saveActivity(Activity activity) {
 		return mgr.save(activity);
 	}
@@ -26,6 +37,7 @@ public class ActivityController {
 	}
 	
 	public void deleteActivity(Activity activity) {
+		theActivity = new Activity();
 		mgr.delete(activity);
 	}
 	
@@ -34,9 +46,7 @@ public class ActivityController {
 	}
 
 	public void editActivity(Long id) {
-		System.out.println(id);
 		theActivity = getActivity(id);
-		System.out.println(theActivity);
 	}
 	
 	public void setTheActivity(Activity theActivity) {
@@ -53,9 +63,12 @@ public class ActivityController {
 		this.theActivity = new Activity();
 		theActivity.setType(type);
 	}
+
+	public LazyDataModel<Activity> getLazyModel() {
+		return lazyModel;
+	}
 	
-	public String deleteTheActivity() {
-		mgr.delete(theActivity);
-		return "cv?faces-redirect=true";
+	public void setLazyModel(LazyDataModel<Activity> lazyModel) {
+		this.lazyModel = lazyModel;
 	}
 }

@@ -20,6 +20,12 @@ public class PersonManager {
 	@PostConstruct
 	public void init() { System.out.println("Init PersonManager"); }
 	
+	public Long countPersons() {
+		String q = 	"select count(p) from Person p";
+		TypedQuery<Long> query = em.createQuery(q, Long.class);
+		return query.getSingleResult();
+	}
+	
 	public Person find(Long id) {
 		return em.find(Person.class, id);
 	}

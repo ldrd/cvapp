@@ -14,16 +14,10 @@
         	<h2>#{messages.subtitleInscription}</h2>
             <div id="sign-up-grid">
 	            <p:inputText id="firstname-insc" class="col1 row1" placeholder="#{messages.firstname}" requiredMessage="Value required"
-	            	value="#{user.user.firstname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
-	            	<f:validateLength minimum="1"/>
-                	<p:clientValidator event="blur"/>
-	            </p:inputText>
+	            	value="#{user.user.firstname}" required="true"/>
 	           <p:message for="@previous"/>
 	            <p:inputText class="col2 row1" placeholder="#{messages.lastname}" requiredMessage="Value required"
-	            	value="#{user.user.lastname}" required="true" validatorMessage="Value does not match a name pattern or its length is not between 2 and 50 letters.">
-	            	<f:validateLength minimum="1"/>
-                	<p:clientValidator event="blur"/>
-	            </p:inputText>
+	            	value="#{user.user.lastname}" required="true"/>
 	            <p:message for="@previous"/>
 	            <p:inputText class="cols13" placeholder="Email" requiredMessage="Value required"
 	            	value="#{user.user.email}" required="true" validatorMessage="This is not an email address">

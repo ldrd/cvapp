@@ -31,7 +31,7 @@
     			#{messages.email} :
     			<span class="email">#{p.email}</span><br/>
     			#{messages.birthday} : 
-    			<span class="birthday">#{p.birthday.date} February #{p.birthday.year}</span>
+    			<span class="birthday">#{p.birthday.date} #{user.getMonthFromIndex(p.birthday.month)} #{p.birthday.year}</span>
     		</div>
     		
     	</div>
@@ -47,12 +47,13 @@
     		<div class="result">
     			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
 	    			<h:panelGroup rendered="#{a.type == 'experience'}">
-	    				<p:commandButton class="icon-profile custom-button" icon="icon-edit"
+	    				<h1><p:commandLink value="#{a.title}"
     						action="#{activity.editActivity(a.id)}" update="md-activity"
     						onclick="showEditActivity()"/>
-		    			<h1>#{a.title}</h1>
+    					</h1>
+		    			
 		    			<h2>#{a.place}</h2>
-		    			<h3>#{a.monthFrom} #{a.yearFrom} - #{a.monthTo} #{a.yearTo}</h3>
+		    			<h3>#{user.getMonthFromIndex(a.monthFrom)} #{a.yearFrom} - #{user.getMonthFromIndex(a.monthTo)} #{a.yearTo}</h3>
 		    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
 		    		</h:panelGroup>
 		    	</ui:repeat>
@@ -74,7 +75,7 @@
     						action="#{activity.editActivity(a.id)}" update="md-activity" onclick="showEditActivity()"/>
 		    			<h1>#{a.title}</h1>
 		    			<h2>#{a.place}</h2>
-		    			<h3>#{a.monthFrom} #{a.yearFrom} - #{a.monthTo} #{a.yearTo}</h3>
+		    			<h3>#{user.getMonthFromIndex(a.monthFrom)} #{a.yearFrom} - #{user.getMonthFromIndex(a.monthTo)} #{a.yearTo}</h3>
 		    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
 		    		</h:panelGroup>
 		    	</ui:repeat>
@@ -95,7 +96,7 @@
     						action="#{activity.editActivity(a.id)}" update="md-activity" onclick="showEditActivity()"/>
 		    			<h1>#{a.title}</h1>
 		    			<h2>#{a.place}</h2>
-		    			<h3>#{a.monthFrom} #{a.yearFrom} - #{a.monthTo} #{a.yearTo}</h3>
+		    			<h3>#{user.getMonthFromIndex(a.monthFrom)} #{a.yearFrom} - #{user.getMonthFromIndex(a.monthTo)} #{a.yearTo}</h3>
 		    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
 		    		</h:panelGroup>
 		    	</ui:repeat>
@@ -110,13 +111,13 @@
 			    </header>
 			    <div class="scrollable-content">
 					<span class="col1 row1 label">#{messages.firstname} *</span><br/>
-					<p:inputText class="col1 row2"  value="#{p.firstname}"/>
+					<p:inputText class="col1 row2"  value="#{p.firstname}" requiredMessage="Value required" required="true"/>
 					
 					<span class="col2 row1 label">#{messages.lastname} *</span><br/>
-					<p:inputText  class="col2 row2"  value="#{p.lastname}"/>
+					<p:inputText  class="col2 row2"  value="#{p.lastname}" requiredMessage="Value required" required="true"/>
 					
 					<span class="label col1">#{messages.headline}</span><br/>
-					<p:inputTextarea class="cols13" maxlength="123" autoResize="false"  value="#{p.headline}"/>
+					<p:inputTextarea class="cols13" maxlength="123" autoResize="false"  value="#{p.headline}" required="true"/>
 					
 					<span class="label">#{messages.currentPosition}</span><br/>
 					<p:inputText class="cols13"  value="#{p.position}"/>
@@ -125,7 +126,11 @@
 					<p:inputText class="cols13" value="#{p.address}"/>
 					
 					<span class="label">#{messages.email} *</span><br/>
-					<p:inputText class="cols13" value="#{p.email}"/>
+					<p:inputText class="cols13" value="#{p.email}"  requiredMessage="Value required" required="true"
+                        validatorMessage="This is not an email address">
+	            	<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+	            	<p:clientValidator event="blur"/>
+	            </p:inputText>
 		
 					<span class="label">#{messages.website}</span><br/>
 					<p:inputText class="cols13"  value="#{p.websiteUrl}"/>
@@ -152,7 +157,7 @@
 			    <div class="scrollable-content">
 			    	<c:set var="theA" value="#{activity.theActivity}" />
 					<span class="label">#{messages.title}</span><br/>
-					<p:inputText class="cols13" value="#{theA.title}"/>
+					<p:inputText class="cols13" value="#{theA.title}" required="true"/>
 					
 					<span class="label">#{messages.company_school}</span><br/>
 					<p:inputText  class="cols13" value="#{theA.place}"/>
@@ -163,7 +168,7 @@
 					    	<f:selectItem itemValue="#{idx.index}" itemLabel="#{month}"/>
 					  	</c:forEach>
 			        </p:selectOneMenu>
-					<p:inputText class="col1 row7" value="#{theA.yearFrom}"/>
+					<p:inputNumber class="col1 row7" value="#{theA.yearFrom}" minValue="1920" maxValue="2100"/>
 					
 					<span class="label col2 row5">#{messages.to}</span><br/>
 					<p:selectOneMenu value="#{theA.monthTo}" class="col2 row6">
@@ -171,17 +176,17 @@
 					    	<f:selectItem itemValue="#{idx.index}" itemLabel="#{month}"/>
 					  	</c:forEach>
 			        </p:selectOneMenu>
-					<p:inputText class="col2 row7" value="#{theA.yearTo}"/>
+					<p:inputNumber class="col2 row7" value="#{theA.yearTo}" minValue="1920" maxValue="2100"/>
 		
 					<span class="label">#{messages.description}</span><br/>
-					<p:inputTextarea value="#{theA.description}" class="cols13" maxlength="500" autoResize="false" />
+					<p:inputTextarea value="#{theA.description}" class="cols13" maxlength="500" autoResize="false" required="true"/>
 					
 					<span class="label">#{messages.website}</span><br/>
 					<p:inputText value="#{theA.websiteUrl}"/>
 				</div>
 				<footer>
 					<p:commandButton value="#{messages.save}" action="#{person.saveActivity}"/>
-					<p:commandButton value="#{messages.delete}" action="#{activity.deleteActivity}" rendered="#{theA.id}"/>
+					<p:commandButton value="#{messages.delete}" action="#{person.deleteActivity(theA.id)}" rendered="#{theA.id != null}"/>
 				</footer>
 			  </h:form>
 		</div>

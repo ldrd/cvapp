@@ -80,6 +80,12 @@ public class UserController {
 		return months;
 	}
 	
+	public String getMonthFromIndex(int index) {
+		if (index < 0 || index > 11)
+			return null;
+		return getMonths().get(index);
+	}
+	
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}

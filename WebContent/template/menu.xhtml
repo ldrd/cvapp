@@ -22,9 +22,9 @@
 		<h:form class="search-form">
 			<div class="ui-inputgroup">
 			    <p:inputText id="text" class="search-bar" onfocus="showSearchResult()"
-			    	value="#{person.searchQuery}" placeholder="#{messages.search}">
+			    	value="#{search.searchQuery}" placeholder="#{messages.search}">
 			        <p:ajax event="keyup" update="affichage"
-	   					listener="#{person.findByName}" /> 
+	   					listener="#{search.findPersonsByName}" /> 
 			    </p:inputText>
 			    <p:commandButton icon="ui-icon-search" styleClass="white-button" action="#{person.searchByName}"/>
 		    </div>
