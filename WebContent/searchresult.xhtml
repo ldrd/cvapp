@@ -11,9 +11,9 @@
     	<h:outputScript library="js" name="cv.js" />
     	<h:outputStylesheet library="css" name="cv.css" />
 
-        <div class="w3-bar w3-black">
-          <button class="w3-bar-item w3-button" onclick="openTab('People')">People</button>
-          <button class="w3-bar-item w3-button" onclick="openTab('Activities')">Activities</button>
+        <div id="tab-bar">
+          <div class="bar-item tab-active" onclick="openTab(event, 'People')">People</div>
+          <div class="bar-item" onclick="openTab(event, 'Activities')">Activities</div>
         </div>
         
         <div id="People" class="tab">
@@ -52,7 +52,6 @@
 			       			<h1><h:commandLink action="#{person.cv(a.person.id)}"
 			    				value="#{a.title}"/></h1>
 			    			<h2>#{a.place}</h2>
-			    			<h3>#{user.getMonthFromIndex(a.monthFrom)} #{a.yearFrom} - #{user.getMonthFromIndex(a.monthTo)} #{a.yearTo}</h3>
 			    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
 			       		</div>
 			       	</div>
@@ -62,7 +61,7 @@
         </div>
         
 		<h:form class="form-button-add-account">
-			<p:commandButton class="button-add-account" value="#{messages.create}" onclick="showAddPerson()"/>
+			<p:commandButton class="button-add-account" value="#{messages.create}" onclick="showAddPerson()"  rendered="#{user.loggedIn}"/>
     	</h:form>
     	
     	

@@ -37,8 +37,12 @@ public class ActivityController {
 	}
 	
 	public void deleteActivity(Activity activity) {
-		theActivity = new Activity();
 		mgr.delete(activity);
+	}
+	
+	public void deleteTheActivity() {
+		mgr.delete(theActivity);
+		theActivity = new Activity();
 	}
 	
 	public Activity getTheActivity() {
@@ -53,10 +57,9 @@ public class ActivityController {
 		this.theActivity = theActivity;
 	}
 	
-	public String saveTheActivity(Person person) {
+	public void saveTheActivity(Person person) {
 		theActivity.setPerson(person);
 		saveActivity(theActivity);
-		return "cv?faces-redirect=true";
 	}
 	
 	public void initTheActivity(String type) {

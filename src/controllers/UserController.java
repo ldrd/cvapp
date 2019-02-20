@@ -66,6 +66,7 @@ public class UserController {
 		return "inscription?faces-redirect=true";	
 	}
 	
+    //Should not be here.
 	public List<String> getMonths() {
 		Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 		Map<String, Integer> monthsMap = Calendar.getInstance().getDisplayNames(

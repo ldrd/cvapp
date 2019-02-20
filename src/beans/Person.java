@@ -25,9 +25,6 @@ public class Person implements Serializable {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(name = "picture")
-	private String picture;
-	
 	@Column(name = "lastname")
 	@NotNull @Size(min = 1)
 	private String lastname;
@@ -40,6 +37,7 @@ public class Person implements Serializable {
 	@Size(max = 123)
 	private String headline;
 	
+	 // The position is where the person is working or studying
 	@Column(name = "position")
 	@Size(max = 100)
 	private String position;
@@ -113,6 +111,7 @@ public class Person implements Serializable {
 		return password;
 	}
 
+	//Use SHA256 to hash the passowrd
 	public void setPassword(String password) {
 		this.password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
 	}
@@ -123,14 +122,6 @@ public class Person implements Serializable {
 
 	public void setActivities(Set<Activity> activities) {
 		this.activities = activities;
-	}
-
-	public String getPicture() {
-		return picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
 	}
 
 	public String getHeadline() {

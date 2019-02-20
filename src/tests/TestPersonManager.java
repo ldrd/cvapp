@@ -40,7 +40,7 @@ public class TestPersonManager {
     	p.setEmail("tadd@t.t");
     	p.setFirstname("testF");
     	p.setLastname("testL");
-    	p.setPassword("test");
+    	p.setPassword("test123");
     	mgr.save(p);
     	assertEquals(count + 1, mgr.findAll().size());
     }
@@ -51,7 +51,7 @@ public class TestPersonManager {
     	p.setEmail("tupdate@t.t");
     	p.setFirstname("testF");
     	p.setLastname("testL");
-    	p.setPassword("test");
+    	p.setPassword("test123");
     	p = mgr.save(p);
     	p.setFirstname("testFirst");
     	p = mgr.save(p);
@@ -65,7 +65,7 @@ public class TestPersonManager {
     	p.setEmail("tdelete@t.t");
     	p.setFirstname("testF");
     	p.setLastname("testL");
-    	p.setPassword("test");
+    	p.setPassword("test123");
     	p = mgr.save(p);
     	mgr.delete(p);
     	assertEquals(count, mgr.findAll().size());
@@ -76,7 +76,7 @@ public class TestPersonManager {
     	p.setEmail("temail@t.t");
     	p.setFirstname("testF");
     	p.setLastname("testL");
-    	p.setPassword("test");
+    	p.setPassword("test123");
     	p = mgr.save(p);
     	assertEquals(p.getId(), mgr.findPersonByEmail("temail@t.t").getId());
     }
@@ -86,13 +86,13 @@ public class TestPersonManager {
     	p1.setEmail("tname1@t.t");
     	p1.setFirstname("xyz");
     	p1.setLastname("testL");
-    	p1.setPassword("test");
+    	p1.setPassword("test123");
     	p1 = mgr.save(p1);
     	Person p2 = new Person();
     	p2.setEmail("tname1@t.t");
     	p2.setFirstname("xyy");
     	p2.setLastname("testL");
-    	p2.setPassword("test");
+    	p2.setPassword("test123");
     	p2 = mgr.save(p2);
     	assertEquals(2, mgr.findPersonsByName("xy").size());
     }

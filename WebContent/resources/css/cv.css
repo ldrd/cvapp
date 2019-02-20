@@ -109,6 +109,23 @@
 	margin-bottom: 20px;
 }
 
+#tab-bar {
+	background-color: white;
+	text-align: center;
+}
+
+.bar-item {
+	display: inline-block;
+	padding: 10px;
+	color: #90949c;
+	cursor: pointer;
+}
+
+.tab-active {
+	background-color: rgb(66,103,178);
+	color: white;
+}
+
 #personal-infos {
 	display: grid;
 	grid-template-columns: 70% 30%;

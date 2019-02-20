@@ -12,7 +12,6 @@ import javax.faces.bean.SessionScoped;
 
 import org.primefaces.model.LazyDataModel;
 
-import beans.Activity;
 import beans.Person;
 import dao.PersonManager;
 import io.codearte.jfairy.Fairy;
@@ -114,14 +113,14 @@ public class PersonController {
 	}
 	
 	public String saveActivity() {
-		thePerson.addActivity(activityController.getTheActivity());
-		return activityController.saveTheActivity(thePerson);
+		activityController.saveTheActivity(thePerson);
+		thePerson = mgr.find(thePerson.getId());
+		return "cv?faces-redirect=true";
 	}
 	
-	public String deleteActivity(Long id) {
-		Activity a = activityController.getActivity(id);
-		activityController.deleteActivity(a);
-		thePerson.removeActivity(a);
+	public String deleteTheActivity() {
+		thePerson.removeActivity(activityController.getTheActivity());
+		activityController.deleteTheActivity();
 		thePerson = mgr.save(thePerson);
 		return "cv?faces-redirect=true";
 	}

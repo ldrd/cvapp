@@ -35,14 +35,14 @@ public class TestActivityManager {
     @Test
     public void testFindByName() {
     	Person p = new Person();
-    	if (personMgr.findAll().size() > 0) {
+    	if (personMgr.countPersons() > 0) {
     		p = personMgr.findAll().get(0);
     	}
     	else {
 	    	p.setEmail("tactivity@t.t");
 	    	p.setFirstname("testF");
 	    	p.setLastname("testL");
-	    	p.setPassword("test");
+	    	p.setPassword("test123");
 	    	personMgr.save(p);
     	}
     	Activity a = new Activity();

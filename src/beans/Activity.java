@@ -29,7 +29,6 @@ public class Activity implements Serializable {
 	private int yearFrom;
 	
 	@Column
-	@NotNull
 	private int monthTo;
 	
 	@Column(length = 4)

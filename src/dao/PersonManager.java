@@ -75,8 +75,8 @@ public class PersonManager {
 
 	public Long countPersonsByName(String name) {
 		String q = 	"select count(p) from Person p " +
-				"where lower(concat(p.lastname,' ',p.firstname)) like lower(:name)" +
-				" or lower(concat(p.firstname,' ',p.lastname)) like lower(:name)";
+					"where lower(concat(p.lastname,' ',p.firstname)) like lower(:name)" +
+					" or lower(concat(p.firstname,' ',p.lastname)) like lower(:name)";
 		TypedQuery<Long> query = em.createQuery(q, Long.class);
 		query.setParameter("name", "%" + name + "%");
 		

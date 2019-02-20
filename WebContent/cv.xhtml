@@ -47,9 +47,17 @@
     		<div class="result">
     			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
 	    			<h:panelGroup rendered="#{a.type == 'experience'}">
-	    				<h1><p:commandLink value="#{a.title}"
-    						action="#{activity.editActivity(a.id)}" update="md-activity"
-    						onclick="showEditActivity()"/>
+	    				<h1>
+	    				<c:choose>
+						    <c:when test="#{p.id == user.user.id}">
+						        <p:commandLink value="#{a.title}"
+		    						action="#{activity.editActivity(a.id)}" update="md-activity"
+		    						onclick="showEditActivity()"/>
+						    </c:when>    
+						    <c:otherwise>
+						        #{a.title}
+						    </c:otherwise>
+						</c:choose>
     					</h1>
 		    			
 		    			<h2>#{a.place}</h2>
@@ -71,9 +79,18 @@
     		<div class="result">
     			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
 	    			<h:panelGroup rendered="#{a.type == 'education'}">
-	    				<p:commandButton class="icon-profile custom-button" icon="icon-edit"
-    						action="#{activity.editActivity(a.id)}" update="md-activity" onclick="showEditActivity()"/>
-		    			<h1>#{a.title}</h1>
+	    				<h1>
+	    				<c:choose>
+						    <c:when test="#{p.id == user.user.id}">
+						        <p:commandLink value="#{a.title}"
+		    						action="#{activity.editActivity(a.id)}" update="md-activity"
+		    						onclick="showEditActivity()"/>
+						    </c:when>    
+						    <c:otherwise>
+						        #{a.title}
+						    </c:otherwise>
+						</c:choose>
+    					</h1>
 		    			<h2>#{a.place}</h2>
 		    			<h3>#{user.getMonthFromIndex(a.monthFrom)} #{a.yearFrom} - #{user.getMonthFromIndex(a.monthTo)} #{a.yearTo}</h3>
 		    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
@@ -92,9 +109,18 @@
     		<div class="result">
     			<ui:repeat var="a" value="#{p.activities}" varStatus="status">
 	    			<h:panelGroup rendered="#{a.type == 'project'}">
-	    				<p:commandButton class="icon-profile custom-button" icon="icon-edit"
-    						action="#{activity.editActivity(a.id)}" update="md-activity" onclick="showEditActivity()"/>
-		    			<h1>#{a.title}</h1>
+	    				<h1>
+	    				<c:choose>
+						    <c:when test="#{p.id == user.user.id}">
+						        <p:commandLink value="#{a.title}"
+		    						action="#{activity.editActivity(a.id)}" update="md-activity"
+		    						onclick="showEditActivity()"/>
+						    </c:when>    
+						    <c:otherwise>
+						        #{a.title}
+						    </c:otherwise>
+						</c:choose>
+    					</h1>
 		    			<h2>#{a.place}</h2>
 		    			<h3>#{user.getMonthFromIndex(a.monthFrom)} #{a.yearFrom} - #{user.getMonthFromIndex(a.monthTo)} #{a.yearTo}</h3>
 		    			<p>#{a.description}<br/><a>#{a.websiteUrl}</a></p>
@@ -168,7 +194,7 @@
 					    	<f:selectItem itemValue="#{idx.index}" itemLabel="#{month}"/>
 					  	</c:forEach>
 			        </p:selectOneMenu>
-					<p:inputNumber class="col1 row7" value="#{theA.yearFrom}" minValue="1920" maxValue="2100"/>
+					<p:inputNumber class="col1 row7" value="#{theA.yearFrom}" padControl="false" maxValue="2100"/>
 					
 					<span class="label col2 row5">#{messages.to}</span><br/>
 					<p:selectOneMenu value="#{theA.monthTo}" class="col2 row6">
@@ -176,7 +202,7 @@
 					    	<f:selectItem itemValue="#{idx.index}" itemLabel="#{month}"/>
 					  	</c:forEach>
 			        </p:selectOneMenu>
-					<p:inputNumber class="col2 row7" value="#{theA.yearTo}" minValue="1920" maxValue="2100"/>
+					<p:inputNumber class="col2 row7" value="#{theA.yearTo}" padControl="false" maxValue="2100"/>
 		
 					<span class="label">#{messages.description}</span><br/>
 					<p:inputTextarea value="#{theA.description}" class="cols13" maxlength="500" autoResize="false" required="true"/>
@@ -186,7 +212,7 @@
 				</div>
 				<footer>
 					<p:commandButton value="#{messages.save}" action="#{person.saveActivity}"/>
-					<p:commandButton value="#{messages.delete}" action="#{person.deleteActivity(theA.id)}" rendered="#{theA.id != null}"/>
+					<p:commandButton value="#{messages.delete}" action="#{person.deleteTheActivity()}" rendered="#{theA.id != null}"/>
 				</footer>
 			  </h:form>
 		</div>
